@@ -1,0 +1,79 @@
+{
+  "title": "Users",
+  "loading": "Loading...",
+  "notFound": "User not found",
+  "empty": "No users found",
+  "backToList": "Back to list",
+  "searchPlaceholder": "Search by name, email, phone...",
+  "columns": {
+    "numero": "No.",
+    "fullName": "Full name",
+    "nationality": "Nationality",
+    "type": "Type",
+    "phone": "Phone",
+    "email": "Email",
+    "actions": "Actions"
+  },
+  "filters": {
+    "type": "User type",
+    "allTypes": "All types",
+    "nationality": "Filter by nationality"
+  },
+  "actions": {
+    "new": "New user",
+    "edit": "Edit",
+    "exportRgpd": "Export GDPR data",
+    "exportRgpdPending": "Exporting..."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} / {{total}}"
+  },
+  "delete": {
+    "title": "Delete user",
+    "description": "Confirm deletion of {{name}}?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "doublon": {
+    "title": "Potential duplicates detected",
+    "ignore": "Ignore and continue"
+  },
+  "tabs": {
+    "info": "Information",
+    "dossiers": "Cases",
+    "documents": "Documents",
+    "history": "History"
+  },
+  "placeholders": {
+    "dossiers": "Cases available in BLOC 3",
+    "documents": "Available in BLOC 5",
+    "history": "Event history coming soon"
+  },
+  "fields": {
+    "nom": "Last name",
+    "prenom": "First name",
+    "dateNaissance": "Date of birth",
+    "lieuNaissance": "Place of birth",
+    "nationalite": "Nationality",
+    "typeUsager": "User type",
+    "telephone": "Phone",
+    "email": "Email",
+    "adresse": "Address",
+    "numeroDocument": "Document number",
+    "typeDocument": "Document type"
+  },
+  "form": {
+    "createTitle": "New user",
+    "editTitle": "Edit user",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "sections": {
+      "identity": "Identity",
+      "contact": "Contact",
+      "document": "Document"
+    }
+  }
+}

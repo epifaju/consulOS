@@ -1,0 +1,79 @@
+{
+  "title": "Usagers",
+  "loading": "Chargement...",
+  "notFound": "Usager introuvable",
+  "empty": "Aucun usager trouvé",
+  "backToList": "Retour à la liste",
+  "searchPlaceholder": "Rechercher par nom, email, téléphone...",
+  "columns": {
+    "numero": "N°",
+    "fullName": "Nom complet",
+    "nationality": "Nationalité",
+    "type": "Type",
+    "phone": "Téléphone",
+    "email": "Email",
+    "actions": "Actions"
+  },
+  "filters": {
+    "type": "Type d'usager",
+    "allTypes": "Tous les types",
+    "nationality": "Filtrer par nationalité (ex: GNB)"
+  },
+  "actions": {
+    "new": "Nouvel usager",
+    "edit": "Modifier",
+    "exportRgpd": "Exporter RGPD",
+    "exportRgpdPending": "Export en cours..."
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} / {{total}}"
+  },
+  "delete": {
+    "title": "Supprimer l'usager",
+    "description": "Confirmer la suppression de {{name}} ? Cette action désactive l'usager.",
+    "confirm": "Supprimer",
+    "cancel": "Annuler"
+  },
+  "doublon": {
+    "title": "Doublons potentiels détectés",
+    "ignore": "Ignorer et continuer"
+  },
+  "tabs": {
+    "info": "Informations",
+    "dossiers": "Dossiers",
+    "documents": "Documents",
+    "history": "Historique"
+  },
+  "placeholders": {
+    "dossiers": "Les dossiers seront disponibles au BLOC 3",
+    "documents": "Disponible au BLOC 5",
+    "history": "Historique des événements à venir"
+  },
+  "fields": {
+    "nom": "Nom",
+    "prenom": "Prénom",
+    "dateNaissance": "Date de naissance",
+    "lieuNaissance": "Lieu de naissance",
+    "nationalite": "Nationalité",
+    "typeUsager": "Type d'usager",
+    "telephone": "Téléphone",
+    "email": "Email",
+    "adresse": "Adresse",
+    "numeroDocument": "N° document",
+    "typeDocument": "Type de document"
+  },
+  "form": {
+    "createTitle": "Nouvel usager",
+    "editTitle": "Modifier l'usager",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "sections": {
+      "identity": "Identité",
+      "contact": "Contact",
+      "document": "Document"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Appointments agenda",
+  "loading": "Loading…",
+  "filters": {
+    "typeService": "Service type",
+    "allTypes": "All types"
+  },
+  "actions": {
+    "new": "New appointment",
+    "addSlot": "Add appointment",
+    "present": "Present",
+    "absent": "Absent",
+    "annuler": "Cancel",
+    "reporter": "Reschedule",
+    "confirmer": "Confirm",
+    "motifPlaceholder": "Reason (optional)",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "statuts": {
+    "CONFIRME": "Confirmed",
+    "EN_ATTENTE": "Pending",
+    "PRESENT": "Present",
+    "ABSENT": "Absent",
+    "ANNULE": "Cancelled",
+    "REPORTE": "Rescheduled"
+  },
+  "create": {
+    "title": "New appointment",
+    "step1": "Date & slot",
+    "step2": "Citizen",
+    "step3": "Details",
+    "date": "Date",
+    "typeService": "Service type",
+    "selectType": "Select type",
+    "noType": "No specific type",
+    "creneaux": "Available slots",
+    "noSlots": "No slots available",
+    "usagerSearch": "Search citizen…",
+    "recapDate": "Date and time",
+    "recapUsager": "Citizen",
+    "notes": "Notes",
+    "next": "Next",
+    "prev": "Previous",
+    "submit": "Create",
+    "creating": "Creating…"
+  },
+  "detail": {
+    "title": "Appointment details",
+    "date": "Date and time",
+    "usager": "Citizen",
+    "service": "Service",
+    "agent": "Agent",
+    "dossier": "Case",
+    "notes": "Notes"
+  }
+}

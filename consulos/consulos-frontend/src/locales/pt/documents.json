@@ -1,0 +1,51 @@
+{
+  "title": "Documentos",
+  "loading": "A carregar…",
+  "types": {
+    "PIECE_IDENTITE": "Documento de identidade",
+    "JUSTIFICATIF": "Comprovativo",
+    "PHOTO": "Fotografia",
+    "FORMULAIRE": "Formulário",
+    "AUTRE": "Outro"
+  },
+  "statuts": {
+    "RECU": "Recebido",
+    "LISIBLE": "Legível",
+    "COMPLET": "Completo",
+    "A_CORRIGER": "A corrigir",
+    "VALIDE": "Validado"
+  },
+  "upload": {
+    "title": "Adicionar documento",
+    "dropzone": "Arraste e solte um ficheiro aqui ou clique para procurar",
+    "hint": "PDF, JPEG, PNG ou WebP — máx. 10 Mo",
+    "typeDocument": "Tipo de documento",
+    "notes": "Notas (opcional)",
+    "submit": "Enviar",
+    "uploading": "A enviar…",
+    "success": "Documento enviado com sucesso",
+    "errors": {
+      "mime": "Tipo de ficheiro não permitido",
+      "size": "Ficheiro demasiado grande (máx. 10 Mo)",
+      "network": "Erro de rede durante o envio"
+    }
+  },
+  "list": {
+    "add": "Adicionar documento",
+    "empty": "Nenhum documento para este processo",
+    "confirmDelete": "Eliminar este documento permanentemente?",
+    "columns": {
+      "name": "Nome",
+      "type": "Tipo",
+      "statut": "Estado de controlo",
+      "size": "Tamanho",
+      "date": "Data",
+      "actions": "Ações"
+    }
+  },
+  "viewer": {
+    "fullscreen": "Ecrã inteiro",
+    "error": "Não foi possível carregar o documento",
+    "noPreview": "Pré-visualização não disponível para este tipo de ficheiro"
+  }
+}

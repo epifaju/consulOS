@@ -1,0 +1,16 @@
+# Configuration développement local
+server:
+  # 8082 par défaut : évite le conflit avec d'autres apps sur 8080
+  port: ${SERVER_PORT:8082}
+
+spring:
+  datasource:
+    # Port 5433 : évite le conflit avec PostgreSQL Windows sur le port 5432
+    url: ${POSTGRES_URL:jdbc:postgresql://127.0.0.1:5433/consulos_dev}
+
+consulos:
+  cors:
+    allowed-origin-patterns: http://localhost:*,http://127.0.0.1:*
+  jwt:
+    private-key-path: ${JWT_PRIVATE_KEY_PATH:../../secrets/jwt-private.pem}
+    public-key-path: ${JWT_PUBLIC_KEY_PATH:../../secrets/jwt-public.pem}

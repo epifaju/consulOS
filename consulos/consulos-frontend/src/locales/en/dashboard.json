@@ -1,0 +1,33 @@
+{
+  "title": "Dashboard",
+  "loading": "Loading…",
+  "empty": "No data",
+  "kpis": {
+    "dossiersOuverts": "Open cases",
+    "enAttente": "Pending validation",
+    "rdvJour": "Today's appointments",
+    "recettesJour": "Today's revenue"
+  },
+  "charts": {
+    "dossiers": "Cases by service (6 months)",
+    "recettes": "Revenue by method (30d)"
+  },
+  "alerts": {
+    "title": "Active alerts",
+    "empty": "No alerts",
+    "ignore": "Ignore 24h",
+    "viewDossiers": "View {{count}} cases",
+    "types": {
+      "DOSSIERS_BLOQUES": "Cases stuck in review",
+      "ECHEANCES_DEPASSEES": "Overdue deadlines",
+      "AGENTS_SURCHARGES": "Overloaded agents"
+    }
+  },
+  "agents": {
+    "title": "Agent workload",
+    "name": "Agent",
+    "dossiers": "Cases in progress",
+    "rdv": "Today's appointments",
+    "empty": "No active agents"
+  }
+}

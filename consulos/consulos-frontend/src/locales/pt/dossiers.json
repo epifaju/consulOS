@@ -1,0 +1,105 @@
+{
+  "title": "Processos",
+  "detail": "Detalhe do processo",
+  "loading": "A carregar…",
+  "empty": "Nenhum processo encontrado",
+  "notFound": "Processo não encontrado",
+  "backToList": "Voltar à lista",
+  "actions": {
+    "new": "Novo processo",
+    "soumettre": "Submeter",
+    "incomplet": "Marcar incompleto",
+    "enRevue": "Enviar para revisão",
+    "valider": "Validar",
+    "rejeter": "Rejeitar",
+    "retourIncomplet": "Devolver incompleto",
+    "cloturer": "Encerrar",
+    "motifPlaceholder": "Motivo (obrigatório)",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  },
+  "columns": {
+    "reference": "Referência",
+    "usager": "Utente",
+    "typeService": "Tipo de serviço",
+    "statut": "Estado",
+    "agent": "Agente",
+    "priorite": "Prioridade",
+    "echeance": "Prazo",
+    "actions": "Ações"
+  },
+  "filters": {
+    "typeService": "Tipo de serviço",
+    "priorite": "Prioridade",
+    "allTypes": "Todos os tipos",
+    "allPriorites": "Todas as prioridades",
+    "dateDebut": "Data início",
+    "dateFin": "Data fim"
+  },
+  "statuts": {
+    "BROUILLON": "Rascunho",
+    "SOUMIS": "Submetido",
+    "INCOMPLET": "Incompleto",
+    "EN_REVUE": "Em revisão",
+    "VALIDE": "Validado",
+    "REJETE": "Rejeitado",
+    "CLOTURE": "Encerrado"
+  },
+  "priorites": {
+    "URGENTE": "Urgente",
+    "NORMALE": "Normal",
+    "FAIBLE": "Baixa"
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Seguinte",
+    "page": "Página {{current}} / {{total}}"
+  },
+  "create": {
+    "title": "Novo processo",
+    "step1": "Utente",
+    "step2": "Serviço",
+    "step3": "Resumo",
+    "selectUsager": "Selecionar utente",
+    "usagerSearch": "Pesquisar por nome, número…",
+    "selectService": "Escolher tipo de serviço",
+    "recap": "Resumo",
+    "delai": "{{days}} dias úteis",
+    "notes": "Notas internas",
+    "next": "Seguinte",
+    "prev": "Anterior",
+    "submit": "Criar processo",
+    "creating": "A criar…"
+  },
+  "tabs": {
+    "info": "Informações",
+    "documents": "Documentos",
+    "historique": "Histórico",
+    "commentaires": "Comentários"
+  },
+  "fields": {
+    "priorite": "Prioridade",
+    "echeance": "Prazo",
+    "soumission": "Data de submissão",
+    "motifRejet": "Motivo de rejeição",
+    "notes": "Notas internas"
+  },
+  "checklist": {
+    "title": "Documentos necessários",
+    "empty": "Nenhum documento necessário",
+    "progress": "{{validated}}/{{total}} documentos validados"
+  },
+  "historique": {
+    "empty": "Sem histórico",
+    "transition": "{{from}} → {{to}}",
+    "creation": "Criação — {{statut}}"
+  },
+  "documents": {
+    "placeholder": "Módulo de documentos disponível no BLOCO 5"
+  },
+  "commentaires": {
+    "placeholder": "Adicionar comentário…",
+    "add": "Publicar",
+    "anonymous": "Utilizador"
+  }
+}

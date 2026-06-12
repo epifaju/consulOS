@@ -1,0 +1,105 @@
+{
+  "title": "Dossiers",
+  "detail": "Détail dossier",
+  "loading": "Chargement…",
+  "empty": "Aucun dossier trouvé",
+  "notFound": "Dossier introuvable",
+  "backToList": "Retour à la liste",
+  "actions": {
+    "new": "Nouveau dossier",
+    "soumettre": "Soumettre",
+    "incomplet": "Marquer incomplet",
+    "enRevue": "Mettre en revue",
+    "valider": "Valider",
+    "rejeter": "Rejeter",
+    "retourIncomplet": "Retourner incomplet",
+    "cloturer": "Clôturer",
+    "motifPlaceholder": "Motif (obligatoire)",
+    "confirm": "Confirmer",
+    "cancel": "Annuler"
+  },
+  "columns": {
+    "reference": "Référence",
+    "usager": "Usager",
+    "typeService": "Type de service",
+    "statut": "Statut",
+    "agent": "Agent",
+    "priorite": "Priorité",
+    "echeance": "Échéance",
+    "actions": "Actions"
+  },
+  "filters": {
+    "typeService": "Type de service",
+    "priorite": "Priorité",
+    "allTypes": "Tous les types",
+    "allPriorites": "Toutes les priorités",
+    "dateDebut": "Date début",
+    "dateFin": "Date fin"
+  },
+  "statuts": {
+    "BROUILLON": "Brouillon",
+    "SOUMIS": "Soumis",
+    "INCOMPLET": "Incomplet",
+    "EN_REVUE": "En revue",
+    "VALIDE": "Validé",
+    "REJETE": "Rejeté",
+    "CLOTURE": "Clôturé"
+  },
+  "priorites": {
+    "URGENTE": "Urgente",
+    "NORMALE": "Normale",
+    "FAIBLE": "Faible"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} / {{total}}"
+  },
+  "create": {
+    "title": "Nouveau dossier",
+    "step1": "Usager",
+    "step2": "Service",
+    "step3": "Récapitulatif",
+    "selectUsager": "Sélectionner un usager",
+    "usagerSearch": "Rechercher par nom, numéro…",
+    "selectService": "Choisir le type de service",
+    "recap": "Récapitulatif",
+    "delai": "{{days}} jours ouvrés",
+    "notes": "Notes internes",
+    "next": "Suivant",
+    "prev": "Précédent",
+    "submit": "Créer le dossier",
+    "creating": "Création…"
+  },
+  "tabs": {
+    "info": "Informations",
+    "documents": "Documents",
+    "historique": "Historique",
+    "commentaires": "Commentaires"
+  },
+  "fields": {
+    "priorite": "Priorité",
+    "echeance": "Échéance",
+    "soumission": "Date de soumission",
+    "motifRejet": "Motif de rejet",
+    "notes": "Notes internes"
+  },
+  "checklist": {
+    "title": "Pièces à fournir",
+    "empty": "Aucune pièce requise",
+    "progress": "{{validated}}/{{total}} pièces validées"
+  },
+  "historique": {
+    "empty": "Aucun historique",
+    "transition": "{{from}} → {{to}}",
+    "creation": "Création — {{statut}}"
+  },
+  "documents": {
+    "placeholder": "Module documents disponible au BLOC 5"
+  },
+  "commentaires": {
+    "placeholder": "Ajouter un commentaire…",
+    "add": "Publier",
+    "anonymous": "Utilisateur"
+  }
+}

@@ -1,0 +1,46 @@
+# .cursorrules — ConsulOS
+# Ces règles s'appliquent à TOUS les prompts du projet.
+
+## Stack
+- Backend  : Spring Boot 3.3, Java 21, Maven, PostgreSQL 16
+- Frontend : React 18 + Vite 5 + TypeScript 5 strict
+- UI       : Tailwind CSS 3 + shadcn/ui + Radix UI
+- State    : Zustand 4 + TanStack Query 5
+- Forms    : React Hook Form + Zod
+- ORM      : Spring Data JPA + Hibernate 6 + Flyway 10
+- Sécurité : Spring Security + JWT RS256
+- Fichiers : MinIO (S3-compatible)
+- Cache    : Redis 7
+
+## Règles non négociables — Backend
+1. NOUVEAUX FICHIERS UNIQUEMENT. Ne jamais modifier un fichier existant.
+   Toute nouvelle fonctionnalité = nouveaux fichiers dans le bon package.
+2. Toutes les entités étendent BaseEntity (id UUID, createdAt, updatedAt,
+   createdBy, updatedBy, organisationId).
+3. Toutes les réponses REST utilisent ApiResponse<T> ou PageResponse<T>.
+4. Tous les endpoints ont @PreAuthorize avec le rôle minimum requis.
+5. Isolation multi-tenant stricte : organisation_id filtré sur TOUTES les requêtes.
+6. Exceptions métier : BusinessException(errorCode, message, HttpStatus) uniquement.
+7. Migrations : un fichier Flyway V{N}__nom.sql par fonctionnalité, jamais modifié.
+8. Logs : SLF4J + MDC avec userId, organisationId, requestId sur chaque requête.
+9. MapStruct pour toutes les conversions entité ↔ DTO.
+10. Tests : JUnit 5 + Mockito pour unitaires, Testcontainers pour intégration.
+
+## Règles non négociables — Frontend
+1. TypeScript strict : pas de `any`, pas de `as unknown`.
+2. Aucun appel fetch/axios direct dans les composants — TanStack Query obligatoire.
+3. Zustand pour l'état global (auth, user, organisation) — pas de Context API.
+4. Zod pour la validation de TOUS les formulaires et types API.
+5. Structure : /pages, /components, /hooks, /services, /stores, /types — respecter.
+6. Access token en mémoire Zustand uniquement. Refresh token en httpOnly cookie.
+7. Responsive first : breakpoints Tailwind sm/md/lg/xl sur tous les layouts.
+8. Chaque composant dans son propre fichier, exportation nommée + default.
+
+## Palette de couleurs
+primary    : #1B4F72
+accent     : #2E86C1
+light      : #D6EAF8
+background : #F8FAFC
+success    : #1E8449
+warning    : #B7950B
+danger     : #C0392B

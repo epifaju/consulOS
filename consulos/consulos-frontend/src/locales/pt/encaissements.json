@@ -1,0 +1,79 @@
+{
+  "title": "Caixa consular",
+  "loading": "A carregar…",
+  "empty": "Nenhum recebimento para esta data",
+  "columns": {
+    "recu": "Nº recibo",
+    "usager": "Utente",
+    "service": "Serviço",
+    "montant": "Montante",
+    "percu": "Recebido",
+    "mode": "Modo",
+    "statut": "Estado",
+    "actions": "Ações"
+  },
+  "filters": {
+    "statut": "Estado",
+    "mode": "Modo de pagamento",
+    "allStatuts": "Todos os estados",
+    "allModes": "Todos os modos"
+  },
+  "statuts": {
+    "DU": "Em dívida",
+    "PARTIEL": "Parcial",
+    "PAYE": "Pago",
+    "EXONERE": "Isento",
+    "REMBOURSE": "Reembolsado"
+  },
+  "modes": {
+    "ESPECES": "Numerário",
+    "CARTE": "Cartão",
+    "VIREMENT": "Transferência",
+    "EXTERNE": "Externo",
+    "EXONERE": "Isento"
+  },
+  "actions": {
+    "payer": "Registar pagamento",
+    "recu": "Ver recibo",
+    "cancel": "Cancelar"
+  },
+  "form": {
+    "title": "Novo recebimento",
+    "usager": "Utente",
+    "usagerSearch": "Pesquisar utente (mín. 2 caracteres)",
+    "dossier": "Processo associado",
+    "dossierPlaceholder": "Selecionar processo",
+    "noDossier": "Sem processo",
+    "montant": "Montante total",
+    "mode": "Modo de pagamento",
+    "notes": "Notas",
+    "submit": "Criar recebimento"
+  },
+  "paiement": {
+    "title": "Registar pagamento",
+    "montant": "Montante a receber",
+    "reste": "Saldo em dívida",
+    "confirm": "Confirmar pagamento"
+  },
+  "journal": {
+    "exportExcel": "Exportar Excel",
+    "exportExcelPending": "A exportar...",
+    "title": "Diário de caixa",
+    "mode": "Modo",
+    "count": "Nº transações",
+    "total": "Total",
+    "grandTotal": "Total",
+    "empty": "Nenhuma transação recebida"
+  },
+  "recu": {
+    "title": "Recibo consular",
+    "back": "Voltar à caixa",
+    "print": "Imprimir",
+    "download": "Descarregar PDF",
+    "error": "Não foi possível carregar o recibo PDF"
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Seguinte"
+  }
+}

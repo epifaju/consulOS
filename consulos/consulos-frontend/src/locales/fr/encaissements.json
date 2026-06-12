@@ -1,0 +1,79 @@
+{
+  "title": "Caisse consulaire",
+  "loading": "Chargement…",
+  "empty": "Aucun encaissement pour cette date",
+  "columns": {
+    "recu": "N° reçu",
+    "usager": "Usager",
+    "service": "Service",
+    "montant": "Montant",
+    "percu": "Perçu",
+    "mode": "Mode",
+    "statut": "Statut",
+    "actions": "Actions"
+  },
+  "filters": {
+    "statut": "Statut",
+    "mode": "Mode de paiement",
+    "allStatuts": "Tous les statuts",
+    "allModes": "Tous les modes"
+  },
+  "statuts": {
+    "DU": "Dû",
+    "PARTIEL": "Partiel",
+    "PAYE": "Payé",
+    "EXONERE": "Exonéré",
+    "REMBOURSE": "Remboursé"
+  },
+  "modes": {
+    "ESPECES": "Espèces",
+    "CARTE": "Carte",
+    "VIREMENT": "Virement",
+    "EXTERNE": "Externe",
+    "EXONERE": "Exonéré"
+  },
+  "actions": {
+    "payer": "Enregistrer paiement",
+    "recu": "Voir le reçu",
+    "cancel": "Annuler"
+  },
+  "form": {
+    "title": "Nouvel encaissement",
+    "usager": "Usager",
+    "usagerSearch": "Rechercher un usager (min. 2 caractères)",
+    "dossier": "Dossier associé",
+    "dossierPlaceholder": "Sélectionner un dossier",
+    "noDossier": "Aucun dossier",
+    "montant": "Montant total",
+    "mode": "Mode de paiement",
+    "notes": "Notes",
+    "submit": "Créer encaissement"
+  },
+  "paiement": {
+    "title": "Enregistrer un paiement",
+    "montant": "Montant à encaisser",
+    "reste": "Reste dû",
+    "confirm": "Confirmer le paiement"
+  },
+  "journal": {
+    "exportExcel": "Exporter Excel",
+    "exportExcelPending": "Export en cours...",
+    "title": "Journal de caisse",
+    "mode": "Mode",
+    "count": "Nb transactions",
+    "total": "Total",
+    "grandTotal": "Total",
+    "empty": "Aucune transaction encaissée"
+  },
+  "recu": {
+    "title": "Reçu consulaire",
+    "back": "Retour à la caisse",
+    "print": "Imprimer",
+    "download": "Télécharger PDF",
+    "error": "Impossible de charger le reçu PDF"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant"
+  }
+}

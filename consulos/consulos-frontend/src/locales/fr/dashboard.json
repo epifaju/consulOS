@@ -1,0 +1,33 @@
+{
+  "title": "Tableau de bord",
+  "loading": "Chargement…",
+  "empty": "Aucune donnée",
+  "kpis": {
+    "dossiersOuverts": "Dossiers ouverts",
+    "enAttente": "En attente validation",
+    "rdvJour": "RDV du jour",
+    "recettesJour": "Recettes du jour"
+  },
+  "charts": {
+    "dossiers": "Dossiers par service (6 mois)",
+    "recettes": "Recettes par mode (30 j)"
+  },
+  "alerts": {
+    "title": "Alertes actives",
+    "empty": "Aucune alerte",
+    "ignore": "Ignorer 24h",
+    "viewDossiers": "Voir les {{count}} dossiers",
+    "types": {
+      "DOSSIERS_BLOQUES": "Dossiers bloqués en revue",
+      "ECHEANCES_DEPASSEES": "Échéances dépassées",
+      "AGENTS_SURCHARGES": "Agents surchargés"
+    }
+  },
+  "agents": {
+    "title": "Charge des agents",
+    "name": "Agent",
+    "dossiers": "Dossiers en cours",
+    "rdv": "RDV aujourd'hui",
+    "empty": "Aucun agent actif"
+  }
+}

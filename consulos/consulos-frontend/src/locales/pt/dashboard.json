@@ -1,0 +1,33 @@
+{
+  "title": "Painel",
+  "loading": "A carregar…",
+  "empty": "Sem dados",
+  "kpis": {
+    "dossiersOuverts": "Processos abertos",
+    "enAttente": "Aguardam validação",
+    "rdvJour": "Marcações hoje",
+    "recettesJour": "Receitas do dia"
+  },
+  "charts": {
+    "dossiers": "Processos por serviço (6 meses)",
+    "recettes": "Receitas por modo (30d)"
+  },
+  "alerts": {
+    "title": "Alertas ativos",
+    "empty": "Sem alertas",
+    "ignore": "Ignorar 24h",
+    "viewDossiers": "Ver {{count}} processos",
+    "types": {
+      "DOSSIERS_BLOQUES": "Processos bloqueados em revisão",
+      "ECHEANCES_DEPASSEES": "Prazos ultrapassados",
+      "AGENTS_SURCHARGES": "Agentes sobrecarregados"
+    }
+  },
+  "agents": {
+    "title": "Carga dos agentes",
+    "name": "Agente",
+    "dossiers": "Processos em curso",
+    "rdv": "Marcações hoje",
+    "empty": "Nenhum agente ativo"
+  }
+}

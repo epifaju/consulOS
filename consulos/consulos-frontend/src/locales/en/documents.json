@@ -1,0 +1,51 @@
+{
+  "title": "Documents",
+  "loading": "Loading…",
+  "types": {
+    "PIECE_IDENTITE": "ID document",
+    "JUSTIFICATIF": "Supporting document",
+    "PHOTO": "Photo",
+    "FORMULAIRE": "Form",
+    "AUTRE": "Other"
+  },
+  "statuts": {
+    "RECU": "Received",
+    "LISIBLE": "Readable",
+    "COMPLET": "Complete",
+    "A_CORRIGER": "To fix",
+    "VALIDE": "Validated"
+  },
+  "upload": {
+    "title": "Add document",
+    "dropzone": "Drag and drop a file here or click to browse",
+    "hint": "PDF, JPEG, PNG or WebP — max 10 MB",
+    "typeDocument": "Document type",
+    "notes": "Notes (optional)",
+    "submit": "Upload",
+    "uploading": "Uploading…",
+    "success": "Document uploaded successfully",
+    "errors": {
+      "mime": "File type not allowed",
+      "size": "File too large (max 10 MB)",
+      "network": "Network error during upload"
+    }
+  },
+  "list": {
+    "add": "Add document",
+    "empty": "No documents for this case",
+    "confirmDelete": "Permanently delete this document?",
+    "columns": {
+      "name": "Name",
+      "type": "Type",
+      "statut": "Control status",
+      "size": "Size",
+      "date": "Date",
+      "actions": "Actions"
+    }
+  },
+  "viewer": {
+    "fullscreen": "Fullscreen",
+    "error": "Unable to load document",
+    "noPreview": "Preview not available for this file type"
+  }
+}

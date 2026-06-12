@@ -1,0 +1,71 @@
+{
+  "title": "Administration",
+  "nav": {
+    "users": "Agents",
+    "roles": "Rôles",
+    "parametres": "Paramètres",
+    "audit": "Journal d'audit"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant"
+  },
+  "users": {
+    "title": "Gestion des agents",
+    "new": "Nouvel agent",
+    "create": "Créer un agent",
+    "edit": "Modifier l'agent",
+    "tempPassword": "Mot de passe temporaire",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "actions": "Actions",
+    "fields": {
+      "name": "Nom",
+      "email": "Email",
+      "nom": "Nom",
+      "prenom": "Prénom",
+      "role": "Rôle",
+      "actif": "Compte actif"
+    }
+  },
+  "roles": {
+    "title": "Rôles et permissions",
+    "readonly": "Les permissions sont définies dans le code applicatif (lecture seule)."
+  },
+  "parametres": {
+    "title": "Paramètres du poste",
+    "tabs": {
+      "general": "Général",
+      "horaires": "Horaires",
+      "tarifs": "Tarifs"
+    },
+    "general": "Informations générales",
+    "creneaux": "Créneaux horaires",
+    "fermetures": "Jours de fermeture",
+    "tarifs": "Tarifs consulaires",
+    "fields": {
+      "nom": "Nom du consulat",
+      "pays": "Code pays",
+      "langue": "Langue par défaut",
+      "devise": "Devise"
+    }
+  },
+  "audit": {
+    "title": "Journal d'audit",
+    "export": "Exporter CSV",
+    "filters": {
+      "action": "Filtrer par action"
+    },
+    "columns": {
+      "date": "Date",
+      "user": "Utilisateur",
+      "action": "Action",
+      "entite": "Entité",
+      "ip": "IP"
+    }
+  }
+}

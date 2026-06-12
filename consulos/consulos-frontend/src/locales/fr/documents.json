@@ -1,0 +1,51 @@
+{
+  "title": "Documents",
+  "loading": "Chargement…",
+  "types": {
+    "PIECE_IDENTITE": "Pièce d'identité",
+    "JUSTIFICATIF": "Justificatif",
+    "PHOTO": "Photo",
+    "FORMULAIRE": "Formulaire",
+    "AUTRE": "Autre"
+  },
+  "statuts": {
+    "RECU": "Reçu",
+    "LISIBLE": "Lisible",
+    "COMPLET": "Complet",
+    "A_CORRIGER": "À corriger",
+    "VALIDE": "Validé"
+  },
+  "upload": {
+    "title": "Ajouter un document",
+    "dropzone": "Glissez-déposez un fichier ici ou cliquez pour parcourir",
+    "hint": "PDF, JPEG, PNG ou WebP — max 10 Mo",
+    "typeDocument": "Type de document",
+    "notes": "Notes (optionnel)",
+    "submit": "Envoyer",
+    "uploading": "Envoi en cours…",
+    "success": "Document uploadé avec succès",
+    "errors": {
+      "mime": "Type de fichier non autorisé",
+      "size": "Fichier trop volumineux (max 10 Mo)",
+      "network": "Erreur réseau lors de l'envoi"
+    }
+  },
+  "list": {
+    "add": "Ajouter un document",
+    "empty": "Aucun document pour ce dossier",
+    "confirmDelete": "Supprimer ce document définitivement ?",
+    "columns": {
+      "name": "Nom",
+      "type": "Type",
+      "statut": "Statut contrôle",
+      "size": "Taille",
+      "date": "Date",
+      "actions": "Actions"
+    }
+  },
+  "viewer": {
+    "fullscreen": "Plein écran",
+    "error": "Impossible de charger le document",
+    "noPreview": "Aperçu non disponible pour ce type de fichier"
+  }
+}

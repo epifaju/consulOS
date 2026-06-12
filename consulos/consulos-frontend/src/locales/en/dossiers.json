@@ -1,0 +1,105 @@
+{
+  "title": "Cases",
+  "detail": "Case detail",
+  "loading": "Loading…",
+  "empty": "No cases found",
+  "notFound": "Case not found",
+  "backToList": "Back to list",
+  "actions": {
+    "new": "New case",
+    "soumettre": "Submit",
+    "incomplet": "Mark incomplete",
+    "enRevue": "Send for review",
+    "valider": "Approve",
+    "rejeter": "Reject",
+    "retourIncomplet": "Return incomplete",
+    "cloturer": "Close",
+    "motifPlaceholder": "Reason (required)",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "columns": {
+    "reference": "Reference",
+    "usager": "Citizen",
+    "typeService": "Service type",
+    "statut": "Status",
+    "agent": "Agent",
+    "priorite": "Priority",
+    "echeance": "Due date",
+    "actions": "Actions"
+  },
+  "filters": {
+    "typeService": "Service type",
+    "priorite": "Priority",
+    "allTypes": "All types",
+    "allPriorites": "All priorities",
+    "dateDebut": "Start date",
+    "dateFin": "End date"
+  },
+  "statuts": {
+    "BROUILLON": "Draft",
+    "SOUMIS": "Submitted",
+    "INCOMPLET": "Incomplete",
+    "EN_REVUE": "Under review",
+    "VALIDE": "Approved",
+    "REJETE": "Rejected",
+    "CLOTURE": "Closed"
+  },
+  "priorites": {
+    "URGENTE": "Urgent",
+    "NORMALE": "Normal",
+    "FAIBLE": "Low"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} / {{total}}"
+  },
+  "create": {
+    "title": "New case",
+    "step1": "Citizen",
+    "step2": "Service",
+    "step3": "Summary",
+    "selectUsager": "Select a citizen",
+    "usagerSearch": "Search by name, number…",
+    "selectService": "Choose service type",
+    "recap": "Summary",
+    "delai": "{{days}} business days",
+    "notes": "Internal notes",
+    "next": "Next",
+    "prev": "Previous",
+    "submit": "Create case",
+    "creating": "Creating…"
+  },
+  "tabs": {
+    "info": "Information",
+    "documents": "Documents",
+    "historique": "History",
+    "commentaires": "Comments"
+  },
+  "fields": {
+    "priorite": "Priority",
+    "echeance": "Due date",
+    "soumission": "Submission date",
+    "motifRejet": "Rejection reason",
+    "notes": "Internal notes"
+  },
+  "checklist": {
+    "title": "Required documents",
+    "empty": "No documents required",
+    "progress": "{{validated}}/{{total}} documents validated"
+  },
+  "historique": {
+    "empty": "No history",
+    "transition": "{{from}} → {{to}}",
+    "creation": "Created — {{statut}}"
+  },
+  "documents": {
+    "placeholder": "Documents module available in BLOCK 5"
+  },
+  "commentaires": {
+    "placeholder": "Add a comment…",
+    "add": "Post",
+    "anonymous": "User"
+  }
+}

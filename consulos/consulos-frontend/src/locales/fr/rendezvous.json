@@ -1,0 +1,57 @@
+{
+  "title": "Agenda des rendez-vous",
+  "loading": "Chargement…",
+  "filters": {
+    "typeService": "Type de service",
+    "allTypes": "Tous les types"
+  },
+  "actions": {
+    "new": "Nouveau rendez-vous",
+    "addSlot": "Ajouter un rendez-vous",
+    "present": "Présent",
+    "absent": "Absent",
+    "annuler": "Annuler",
+    "reporter": "Reporter",
+    "confirmer": "Confirmer",
+    "motifPlaceholder": "Motif (optionnel)",
+    "confirm": "Confirmer",
+    "cancel": "Annuler"
+  },
+  "statuts": {
+    "CONFIRME": "Confirmé",
+    "EN_ATTENTE": "En attente",
+    "PRESENT": "Présent",
+    "ABSENT": "Absent",
+    "ANNULE": "Annulé",
+    "REPORTE": "Reporté"
+  },
+  "create": {
+    "title": "Nouveau rendez-vous",
+    "step1": "Date & créneau",
+    "step2": "Usager",
+    "step3": "Détails",
+    "date": "Date",
+    "typeService": "Type de service",
+    "selectType": "Choisir un type",
+    "noType": "Sans type spécifique",
+    "creneaux": "Créneaux disponibles",
+    "noSlots": "Aucun créneau disponible",
+    "usagerSearch": "Rechercher un usager…",
+    "recapDate": "Date et heure",
+    "recapUsager": "Usager",
+    "notes": "Notes",
+    "next": "Suivant",
+    "prev": "Précédent",
+    "submit": "Créer",
+    "creating": "Création…"
+  },
+  "detail": {
+    "title": "Détail du rendez-vous",
+    "date": "Date et heure",
+    "usager": "Usager",
+    "service": "Service",
+    "agent": "Agent",
+    "dossier": "Dossier",
+    "notes": "Notes"
+  }
+}

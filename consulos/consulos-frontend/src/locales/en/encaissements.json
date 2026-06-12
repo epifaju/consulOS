@@ -1,0 +1,79 @@
+{
+  "title": "Consular cash desk",
+  "loading": "Loading…",
+  "empty": "No payments for this date",
+  "columns": {
+    "recu": "Receipt #",
+    "usager": "Citizen",
+    "service": "Service",
+    "montant": "Amount",
+    "percu": "Received",
+    "mode": "Method",
+    "statut": "Status",
+    "actions": "Actions"
+  },
+  "filters": {
+    "statut": "Status",
+    "mode": "Payment method",
+    "allStatuts": "All statuses",
+    "allModes": "All methods"
+  },
+  "statuts": {
+    "DU": "Due",
+    "PARTIEL": "Partial",
+    "PAYE": "Paid",
+    "EXONERE": "Exempt",
+    "REMBOURSE": "Refunded"
+  },
+  "modes": {
+    "ESPECES": "Cash",
+    "CARTE": "Card",
+    "VIREMENT": "Transfer",
+    "EXTERNE": "External",
+    "EXONERE": "Exempt"
+  },
+  "actions": {
+    "payer": "Record payment",
+    "recu": "View receipt",
+    "cancel": "Cancel"
+  },
+  "form": {
+    "title": "New payment record",
+    "usager": "Citizen",
+    "usagerSearch": "Search citizen (min. 2 characters)",
+    "dossier": "Linked case",
+    "dossierPlaceholder": "Select a case",
+    "noDossier": "No case",
+    "montant": "Total amount",
+    "mode": "Payment method",
+    "notes": "Notes",
+    "submit": "Create payment record"
+  },
+  "paiement": {
+    "title": "Record a payment",
+    "montant": "Amount to collect",
+    "reste": "Balance due",
+    "confirm": "Confirm payment"
+  },
+  "journal": {
+    "exportExcel": "Export Excel",
+    "exportExcelPending": "Exporting...",
+    "title": "Cash journal",
+    "mode": "Method",
+    "count": "Transactions",
+    "total": "Total",
+    "grandTotal": "Total",
+    "empty": "No collected transactions"
+  },
+  "recu": {
+    "title": "Consular receipt",
+    "back": "Back to cash desk",
+    "print": "Print",
+    "download": "Download PDF",
+    "error": "Unable to load receipt PDF"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  }
+}

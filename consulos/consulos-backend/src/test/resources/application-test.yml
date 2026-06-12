@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: redis_dev_pass
+
+consulos:
+  jwt:
+    private-key-path: classpath:test-secrets/jwt-private.pem
+    public-key-path: classpath:test-secrets/jwt-public.pem
+  auth:
+    password-reset-secret: test-reset-secret
+
+logging:
+  level:
+    root: WARN

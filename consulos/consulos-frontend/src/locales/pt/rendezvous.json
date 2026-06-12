@@ -1,0 +1,57 @@
+{
+  "title": "Agenda de marcações",
+  "loading": "A carregar…",
+  "filters": {
+    "typeService": "Tipo de serviço",
+    "allTypes": "Todos os tipos"
+  },
+  "actions": {
+    "new": "Nova marcação",
+    "addSlot": "Adicionar marcação",
+    "present": "Presente",
+    "absent": "Ausente",
+    "annuler": "Cancelar",
+    "reporter": "Reagendar",
+    "confirmer": "Confirmar",
+    "motifPlaceholder": "Motivo (opcional)",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  },
+  "statuts": {
+    "CONFIRME": "Confirmado",
+    "EN_ATTENTE": "Em espera",
+    "PRESENT": "Presente",
+    "ABSENT": "Ausente",
+    "ANNULE": "Cancelado",
+    "REPORTE": "Reagendado"
+  },
+  "create": {
+    "title": "Nova marcação",
+    "step1": "Data e horário",
+    "step2": "Utente",
+    "step3": "Detalhes",
+    "date": "Data",
+    "typeService": "Tipo de serviço",
+    "selectType": "Escolher tipo",
+    "noType": "Sem tipo específico",
+    "creneaux": "Horários disponíveis",
+    "noSlots": "Nenhum horário disponível",
+    "usagerSearch": "Pesquisar utente…",
+    "recapDate": "Data e hora",
+    "recapUsager": "Utente",
+    "notes": "Notas",
+    "next": "Seguinte",
+    "prev": "Anterior",
+    "submit": "Criar",
+    "creating": "Criando…"
+  },
+  "detail": {
+    "title": "Detalhe da marcação",
+    "date": "Data e hora",
+    "usager": "Utente",
+    "service": "Serviço",
+    "agent": "Agente",
+    "dossier": "Processo",
+    "notes": "Notas"
+  }
+}

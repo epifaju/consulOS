@@ -1,0 +1,71 @@
+{
+  "title": "Administration",
+  "nav": {
+    "users": "Staff",
+    "roles": "Roles",
+    "parametres": "Settings",
+    "audit": "Audit log"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "users": {
+    "title": "Staff management",
+    "new": "New staff member",
+    "create": "Create staff member",
+    "edit": "Edit staff member",
+    "tempPassword": "Temporary password",
+    "active": "Active",
+    "inactive": "Inactive",
+    "actions": "Actions",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "nom": "Last name",
+      "prenom": "First name",
+      "role": "Role",
+      "actif": "Active account"
+    }
+  },
+  "roles": {
+    "title": "Roles and permissions",
+    "readonly": "Permissions are defined in application code (read-only)."
+  },
+  "parametres": {
+    "title": "Post settings",
+    "tabs": {
+      "general": "General",
+      "horaires": "Hours",
+      "tarifs": "Fees"
+    },
+    "general": "General information",
+    "creneaux": "Time slots",
+    "fermetures": "Closure days",
+    "tarifs": "Consular fees",
+    "fields": {
+      "nom": "Consulate name",
+      "pays": "Country code",
+      "langue": "Default language",
+      "devise": "Currency"
+    }
+  },
+  "audit": {
+    "title": "Audit log",
+    "export": "Export CSV",
+    "filters": {
+      "action": "Filter by action"
+    },
+    "columns": {
+      "date": "Date",
+      "user": "User",
+      "action": "Action",
+      "entite": "Entity",
+      "ip": "IP"
+    }
+  }
+}

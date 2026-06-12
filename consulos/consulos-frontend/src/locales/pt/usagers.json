@@ -1,0 +1,79 @@
+{
+  "title": "Utentes",
+  "loading": "A carregar...",
+  "notFound": "Utente não encontrado",
+  "empty": "Nenhum utente encontrado",
+  "backToList": "Voltar à lista",
+  "searchPlaceholder": "Pesquisar por nome, email, telefone...",
+  "columns": {
+    "numero": "N°",
+    "fullName": "Nome completo",
+    "nationality": "Nacionalidade",
+    "type": "Tipo",
+    "phone": "Telefone",
+    "email": "Email",
+    "actions": "Ações"
+  },
+  "filters": {
+    "type": "Tipo de utente",
+    "allTypes": "Todos os tipos",
+    "nationality": "Filtrar por nacionalidade"
+  },
+  "actions": {
+    "new": "Novo utente",
+    "edit": "Editar",
+    "exportRgpd": "Exportar dados RGPD",
+    "exportRgpdPending": "A exportar..."
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Seguinte",
+    "page": "Página {{current}} / {{total}}"
+  },
+  "delete": {
+    "title": "Eliminar utente",
+    "description": "Confirmar eliminação de {{name}}?",
+    "confirm": "Eliminar",
+    "cancel": "Cancelar"
+  },
+  "doublon": {
+    "title": "Possíveis duplicados detetados",
+    "ignore": "Ignorar e continuar"
+  },
+  "tabs": {
+    "info": "Informações",
+    "dossiers": "Processos",
+    "documents": "Documentos",
+    "history": "Histórico"
+  },
+  "placeholders": {
+    "dossiers": "Processos disponíveis no BLOC 3",
+    "documents": "Disponível no BLOC 5",
+    "history": "Histórico de eventos em breve"
+  },
+  "fields": {
+    "nom": "Apelido",
+    "prenom": "Nome",
+    "dateNaissance": "Data de nascimento",
+    "lieuNaissance": "Local de nascimento",
+    "nationalite": "Nacionalidade",
+    "typeUsager": "Tipo de utente",
+    "telephone": "Telefone",
+    "email": "Email",
+    "adresse": "Morada",
+    "numeroDocument": "N° documento",
+    "typeDocument": "Tipo de documento"
+  },
+  "form": {
+    "createTitle": "Novo utente",
+    "editTitle": "Editar utente",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "saving": "A guardar...",
+    "sections": {
+      "identity": "Identidade",
+      "contact": "Contacto",
+      "document": "Documento"
+    }
+  }
+}

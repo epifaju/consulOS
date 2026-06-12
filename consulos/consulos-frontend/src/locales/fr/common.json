@@ -1,0 +1,20 @@
+{
+  "appName": "ConsulOS",
+  "loading": "Chargement...",
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+  "search": "Rechercher",
+  "actions": "Actions",
+  "logout": "Déconnexion",
+  "profile": "Profil",
+  "notifications": "Notifications",
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "usagers": "Usagers",
+    "dossiers": "Dossiers",
+    "rendezvous": "Rendez-vous",
+    "documents": "Documents",
+    "caisse": "Caisse",
+    "administration": "Administration"
+  }
+}

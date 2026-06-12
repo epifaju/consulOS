@@ -1,0 +1,71 @@
+{
+  "title": "Administração",
+  "nav": {
+    "users": "Agentes",
+    "roles": "Funções",
+    "parametres": "Parâmetros",
+    "audit": "Registo de auditoria"
+  },
+  "actions": {
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Seguinte"
+  },
+  "users": {
+    "title": "Gestão de agentes",
+    "new": "Novo agente",
+    "create": "Criar agente",
+    "edit": "Editar agente",
+    "tempPassword": "Palavra-passe temporária",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "actions": "Ações",
+    "fields": {
+      "name": "Nome",
+      "email": "Email",
+      "nom": "Apelido",
+      "prenom": "Nome",
+      "role": "Função",
+      "actif": "Conta ativa"
+    }
+  },
+  "roles": {
+    "title": "Funções e permissões",
+    "readonly": "As permissões são definidas no código da aplicação (somente leitura)."
+  },
+  "parametres": {
+    "title": "Parâmetros do posto",
+    "tabs": {
+      "general": "Geral",
+      "horaires": "Horários",
+      "tarifs": "Tarifas"
+    },
+    "general": "Informações gerais",
+    "creneaux": "Horários",
+    "fermetures": "Dias de encerramento",
+    "tarifs": "Tarifas consulares",
+    "fields": {
+      "nom": "Nome do consulado",
+      "pays": "Código do país",
+      "langue": "Idioma padrão",
+      "devise": "Moeda"
+    }
+  },
+  "audit": {
+    "title": "Registo de auditoria",
+    "export": "Exportar CSV",
+    "filters": {
+      "action": "Filtrar por ação"
+    },
+    "columns": {
+      "date": "Data",
+      "user": "Utilizador",
+      "action": "Ação",
+      "entite": "Entidade",
+      "ip": "IP"
+    }
+  }
+}
