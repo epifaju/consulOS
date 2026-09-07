@@ -55,6 +55,18 @@
     "reste": "Saldo em dívida",
     "confirm": "Confirmar pagamento"
   },
+  "online": {
+    "payOnline": "Pagar online",
+    "title": "Pagamento online",
+    "amount": "Montante",
+    "provider": "Fornecedor",
+    "status": "Estado",
+    "confirm": "Simular pagamento bem-sucedido",
+    "success": "Pagamento registado",
+    "back": "Voltar à caixa",
+    "missingSession": "Sessão de pagamento em falta",
+    "notFound": "Sessão não encontrada"
+  },
   "journal": {
     "exportExcel": "Exportar Excel",
     "exportExcelPending": "A exportar...",

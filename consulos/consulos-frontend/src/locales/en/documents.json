@@ -62,6 +62,9 @@
   "viewer": {
     "fullscreen": "Fullscreen",
     "error": "Unable to load document",
-    "noPreview": "Preview not available for this file type"
+    "noPreview": "Preview not available for this file type",
+    "ocr": "OCR text",
+    "ocrEmpty": "No OCR result (module disabled or pending)",
+    "ocrFailed": "OCR failed"
   }
 }

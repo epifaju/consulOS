@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useEnregistrerPaiement } from '@/hooks/useEncaissements'
+import { usePaymentCheckout, usePaymentStatus } from '@/hooks/usePayments'
 import { formatMontant, MODES_PAIEMENT, resteDu } from '@/utils/encaissementStatus'
 import type { EncaissementSummary, ModePaiement } from '@/types/encaissement'
 
@@ -33,7 +34,10 @@ export function PaiementModal({ open, onOpenChange, encaissement, onSuccess }: P
   const [notes, setNotes] = useState('')
 
   const paiementMutation = useEnregistrerPaiement(encaissement?.id ?? '')
+  const paymentStatus = usePaymentStatus(open)
+  const checkoutMutation = usePaymentCheckout()
 
+  const onlineEnabled = paymentStatus.data?.enabled === true
   const reste = encaissement
     ? resteDu(encaissement.montantTotal, encaissement.montantPercu)
     : 0
@@ -60,6 +64,18 @@ export function PaiementModal({ open, onOpenChange, encaissement, onSuccess }: P
         },
       },
     )
+  }
+
+  const handleOnlineCheckout = () => {
+    if (!encaissement) return
+    checkoutMutation.mutate(encaissement.id, {
+      onSuccess: (response) => {
+        const url = response.data.data.checkoutUrl
+        if (url) {
+          window.location.href = url
+        }
+      },
+    })
   }
 
   return (
@@ -119,17 +135,29 @@ export function PaiementModal({ open, onOpenChange, encaissement, onSuccess }: P
               <Input value={notes} onChange={(e) => setNotes(e.target.value)} />
             </div>
 
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" onClick={() => onOpenChange(false)}>
-                {t('actions.cancel')}
-              </Button>
-              <Button
-                onClick={handleSubmit}
-                disabled={paiementMutation.isPending || reste <= 0}
-                className="bg-primary"
-              >
-                {t('paiement.confirm')}
-              </Button>
+            <div className="flex flex-col gap-2">
+              {onlineEnabled && (
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  disabled={checkoutMutation.isPending || reste <= 0}
+                  onClick={handleOnlineCheckout}
+                >
+                  {t('online.payOnline')}
+                </Button>
+              )}
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={() => onOpenChange(false)}>
+                  {t('actions.cancel')}
+                </Button>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={paiementMutation.isPending || reste <= 0}
+                  className="bg-primary"
+                >
+                  {t('paiement.confirm')}
+                </Button>
+              </div>
             </div>
           </div>
         )}

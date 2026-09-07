@@ -55,6 +55,18 @@
     "reste": "Reste dû",
     "confirm": "Confirmer le paiement"
   },
+  "online": {
+    "payOnline": "Payer en ligne",
+    "title": "Paiement en ligne",
+    "amount": "Montant",
+    "provider": "Fournisseur",
+    "status": "Statut",
+    "confirm": "Simuler le paiement réussi",
+    "success": "Paiement enregistré",
+    "back": "Retour à la caisse",
+    "missingSession": "Session de paiement manquante",
+    "notFound": "Session introuvable"
+  },
   "journal": {
     "exportExcel": "Exporter Excel",
     "exportExcelPending": "Export en cours...",

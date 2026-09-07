@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { documentService } from '@/services/documentService'
+import { useDocumentOcr } from '@/hooks/useOcr'
 
 interface DocumentViewerProps {
   documentId: string
@@ -26,6 +27,7 @@ export function DocumentViewer({ documentId, mimeType, nomOriginal }: DocumentVi
 
   const isPdf = mimeType === 'application/pdf'
   const isImage = mimeType?.startsWith('image/') ?? false
+  const ocrQuery = useDocumentOcr(documentId, open)
 
   const fetchUrl = async () => {
     setLoading(true)
@@ -94,6 +96,20 @@ export function DocumentViewer({ documentId, mimeType, nomOriginal }: DocumentVi
           {url && !isPdf && !isImage && (
             <p className="text-muted-foreground text-sm">{t('viewer.noPreview')}</p>
           )}
+          <div className="mt-4 rounded-md border bg-surface p-3">
+            <p className="mb-1 text-sm font-medium text-primary">{t('viewer.ocr')}</p>
+            {ocrQuery.isLoading ? (
+              <p className="text-muted-foreground text-xs">{t('loading')}</p>
+            ) : ocrQuery.data?.status === 'DONE' ? (
+              <pre className="max-h-40 overflow-auto whitespace-pre-wrap text-xs">
+                {ocrQuery.data.extractedText}
+              </pre>
+            ) : ocrQuery.data?.status === 'FAILED' ? (
+              <p className="text-danger text-xs">{t('viewer.ocrFailed')}</p>
+            ) : (
+              <p className="text-muted-foreground text-xs">{t('viewer.ocrEmpty')}</p>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     </>

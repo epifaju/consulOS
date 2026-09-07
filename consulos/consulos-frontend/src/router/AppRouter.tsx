@@ -20,6 +20,7 @@ const DossierDetailPage = lazy(() => import('@/pages/dossiers/DossierDetailPage'
 const AgendaPage = lazy(() => import('@/pages/rendezvous/AgendaPage'))
 const DocumentsPage = lazy(() => import('@/pages/DocumentsPage'))
 const CaissePage = lazy(() => import('@/pages/encaissement/CaissePage'))
+const PaiementEnLignePage = lazy(() => import('@/pages/encaissement/PaiementEnLignePage'))
 const ReportingPage = lazy(() => import('@/pages/reporting/ReportingPage'))
 const RecuPage = lazy(() => import('@/pages/encaissement/RecuPage'))
 const AdminLayout = lazy(() => import('@/pages/administration/AdminLayout'))
@@ -63,6 +64,7 @@ export function AppRouter() {
               <Route path="rendezvous" element={<AgendaPage />} />
               <Route path="documents" element={<DocumentsPage />} />
               <Route path="caisse" element={<CaissePage />} />
+              <Route path="caisse/paiement-en-ligne" element={<PaiementEnLignePage />} />
               <Route path="caisse/recu/:id" element={<RecuPage />} />
               <Route path="reporting" element={<ReportingPage />} />
               <Route element={<ProtectedRoute roles={['ROLE_ADMIN']} />}>

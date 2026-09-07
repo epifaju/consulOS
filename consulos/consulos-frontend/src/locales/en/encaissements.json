@@ -55,6 +55,18 @@
     "reste": "Balance due",
     "confirm": "Confirm payment"
   },
+  "online": {
+    "payOnline": "Pay online",
+    "title": "Online payment",
+    "amount": "Amount",
+    "provider": "Provider",
+    "status": "Status",
+    "confirm": "Simulate successful payment",
+    "success": "Payment recorded",
+    "back": "Back to cashier",
+    "missingSession": "Missing payment session",
+    "notFound": "Session not found"
+  },
   "journal": {
     "exportExcel": "Export Excel",
     "exportExcelPending": "Exporting...",

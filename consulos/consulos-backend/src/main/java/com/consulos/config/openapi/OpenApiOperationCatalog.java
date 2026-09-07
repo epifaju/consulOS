@@ -33,7 +33,9 @@ public final class OpenApiOperationCatalog {
             Map.entry("09 — Notifications", "Inbox in-app et push temps réel WebSocket/STOMP"),
             Map.entry("10 — Portail usager", "Accès citoyen : suivi dossier, documents, RDV"),
             Map.entry("11 — Reporting", "Reporting mensuel et exports Excel/CSV"),
-            Map.entry("12 — SMS", "Statut du canal SMS RDV (optionnel)")
+            Map.entry("12 — SMS", "Statut du canal SMS RDV (optionnel)"),
+            Map.entry("13 — Paiements en ligne", "Checkout / sessions de paiement (optionnel)"),
+            Map.entry("14 — OCR", "Extraction texte documents (optionnel)")
     );
 
     private static final Map<String, OperationMeta> OPERATIONS = new LinkedHashMap<>();
@@ -52,6 +54,8 @@ public final class OpenApiOperationCatalog {
         portal();
         reporting();
         sms();
+        payments();
+        ocr();
     }
 
     public static Optional<OperationMeta> resolve(String handlerKey) {
@@ -470,6 +474,36 @@ public final class OpenApiOperationCatalog {
         put("SmsStatusController#status", "12 — SMS",
                 "Statut du canal SMS",
                 "Indique si le SMS RDV est activé et quel provider est utilisé (présent seulement si enabled=true).",
+                false);
+    }
+
+    private static void payments() {
+        put("PaymentController#status", "13 — Paiements en ligne",
+                "Statut paiement en ligne",
+                "Indique si le module paiement est activé.",
+                false);
+        put("PaymentController#checkout", "13 — Paiements en ligne",
+                "Créer une session checkout",
+                "Ouvre un paiement en ligne pour le reste dû d'un encaissement.",
+                false);
+        put("PaymentController#getSession", "13 — Paiements en ligne",
+                "Détail session",
+                "Retourne une session de paiement par identifiant provider.",
+                false);
+        put("PaymentController#complete", "13 — Paiements en ligne",
+                "Confirmer une session",
+                "Marque la session payée et enregistre le paiement (simulateur / staff).",
+                false);
+        put("PaymentWebhookController#logWebhook", "13 — Paiements en ligne",
+                "Webhook simulateur",
+                "Endpoint public pour confirmer un paiement provider=log.",
+                true);
+    }
+
+    private static void ocr() {
+        put("OcrController#getDocumentOcr", "14 — OCR",
+                "Résultat OCR d'un document",
+                "Texte extrait (stub log ou Tesseract) pour un document uploadé.",
                 false);
     }
 

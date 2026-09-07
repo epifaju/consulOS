@@ -78,6 +78,18 @@ consulos:
       account-sid: ${TWILIO_ACCOUNT_SID:}
       auth-token: ${TWILIO_AUTH_TOKEN:}
       api-base: ${TWILIO_API_BASE:https://api.twilio.com}
+  payment:
+    enabled: ${CONSULOS_PAYMENT_ENABLED:false}
+    provider: ${CONSULOS_PAYMENT_PROVIDER:log}
+    simulate-url: ${CONSULOS_PAYMENT_SIMULATE_URL:http://localhost:3000/caisse/paiement-en-ligne}
+    success-url: ${CONSULOS_PAYMENT_SUCCESS_URL:http://localhost:3000/caisse?payment=success}
+    cancel-url: ${CONSULOS_PAYMENT_CANCEL_URL:http://localhost:3000/caisse?payment=cancel}
+    stripe:
+      secret-key: ${STRIPE_SECRET_KEY:}
+      webhook-secret: ${STRIPE_WEBHOOK_SECRET:}
+  ocr:
+    enabled: ${CONSULOS_OCR_ENABLED:false}
+    provider: ${CONSULOS_OCR_PROVIDER:log}
 
 logging:
   pattern:

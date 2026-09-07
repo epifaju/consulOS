@@ -346,6 +346,10 @@ Toujours en **agent** :
 
 - **SMS RDV (Phase 2, optionnel)** : `CONSULOS_SMS_ENABLED=true` — confirmation / annulation / rappel en complément email (provider `log` ou `twilio`)
 
+- **Paiement en ligne (Phase 3, optionnel)** : `CONSULOS_PAYMENT_ENABLED=true` — bouton « Payer en ligne » en caisse (simulateur `log` ou stub Stripe). Flux démo : Caisse → Payer → « Payer en ligne » → page `/caisse/paiement-en-ligne?session=pay_…` → « Simuler paiement réussi » (mode `EXTERNE`).
+
+- **OCR (Phase 3, optionnel)** : `CONSULOS_OCR_ENABLED=true` — après upload document, texte stub visible dans le viewer (bloc OCR). Provider `log` par défaut ; Tesseract prévu plus tard.
+
 - **Tests** : 19 scénarios Playwright (auth, dossier, documents, caisse, exports, perf < 2 s)
 
 - **Secrets** : clés dans `secrets/`, jamais commitées (`.gitignore`)
