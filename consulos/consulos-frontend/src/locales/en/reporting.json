@@ -1,0 +1,30 @@
+{
+  "title": "Monthly reporting",
+  "subtitle": "Operational summary and Excel / CSV exports",
+  "period": "Period",
+  "year": "Year",
+  "month": "Month",
+  "refresh": "Refresh",
+  "exports": {
+    "excel": "Excel export",
+    "dossiersCsv": "Cases CSV",
+    "rdvCsv": "Appointments CSV"
+  },
+  "kpis": {
+    "dossiers": "Cases created",
+    "documents": "Documents uploaded",
+    "rdv": "Appointments",
+    "encaissements": "Payments",
+    "montant": "Amount received",
+    "delai": "Avg. delay (h)"
+  },
+  "sections": {
+    "dossiersByStatus": "Cases by status",
+    "encaissementsByMode": "Payments by method",
+    "encaissementsByService": "Payments by service",
+    "rdvByStatus": "Appointments by status"
+  },
+  "empty": "No data for this period",
+  "loading": "Loading report…",
+  "forbidden": "Reporting is limited to supervisors and administrators."
+}

@@ -8,6 +8,10 @@
   "logout": "Logout",
   "profile": "Profile",
   "notifications": "Notifications",
+  "notificationPanel": {
+    "empty": "No notifications",
+    "markAllRead": "Mark all read"
+  },
   "errors": {
     "accessDenied": "Access denied — you do not have permission for this action.",
     "unauthorized": "Session expired or invalid credentials.",
@@ -21,6 +25,7 @@
     "rendezvous": "Appointments",
     "documents": "Documents",
     "caisse": "Cashier",
+    "reporting": "Reporting",
     "administration": "Administration"
   }
 }

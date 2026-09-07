@@ -8,6 +8,10 @@
   "logout": "Terminar sessão",
   "profile": "Perfil",
   "notifications": "Notificações",
+  "notificationPanel": {
+    "empty": "Sem notificações",
+    "markAllRead": "Marcar tudo como lido"
+  },
   "errors": {
     "accessDenied": "Acesso negado — não tem permissão para esta ação.",
     "unauthorized": "Sessão expirada ou credenciais inválidas.",
@@ -21,6 +25,7 @@
     "rendezvous": "Marcações",
     "documents": "Documentos",
     "caisse": "Caixa",
+    "reporting": "Relatórios",
     "administration": "Administração"
   }
 }

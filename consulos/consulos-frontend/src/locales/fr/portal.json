@@ -1,0 +1,48 @@
+{
+  "access": {
+    "title": "Portail usager",
+    "subtitle": "Suivez votre dossier avec la référence et l'email de votre fiche.",
+    "reference": "Référence dossier",
+    "email": "Email",
+    "submit": "Recevoir un lien d'accès",
+    "sentTitle": "Vérifiez votre boîte mail",
+    "sentBody": "Si les informations correspondent, un lien sécurisé a été envoyé (valide 1 heure).",
+    "staffLogin": "Espace agents",
+    "errors": {
+      "generic": "Impossible d'envoyer la demande. Réessayez."
+    }
+  },
+  "ouvrir": {
+    "loading": "Ouverture de votre espace…",
+    "error": "Lien invalide ou expiré. Demandez un nouveau lien."
+  },
+  "shell": {
+    "title": "Mon dossier",
+    "logout": "Quitter"
+  },
+  "dossier": {
+    "status": "Statut",
+    "service": "Service",
+    "submitted": "Soumis le",
+    "due": "Échéance",
+    "citizen": "Usager"
+  },
+  "documents": {
+    "title": "Documents",
+    "empty": "Aucun document déposé",
+    "upload": "Déposer un document",
+    "type": "Type",
+    "file": "Fichier",
+    "submit": "Envoyer",
+    "success": "Document déposé"
+  },
+  "rdv": {
+    "title": "Prendre rendez-vous",
+    "date": "Date",
+    "slots": "Créneaux disponibles",
+    "empty": "Aucun créneau ce jour",
+    "book": "Réserver",
+    "success": "Rendez-vous confirmé",
+    "places": "{{restantes}} / {{max}} places"
+  }
+}

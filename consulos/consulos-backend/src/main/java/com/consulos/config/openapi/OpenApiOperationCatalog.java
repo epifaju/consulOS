@@ -29,7 +29,11 @@ public final class OpenApiOperationCatalog {
             Map.entry("06 — Tarifs", "Grille tarifaire par type de service"),
             Map.entry("07 — Tableau de bord", "KPIs, graphiques, alertes, charge agents"),
             Map.entry("08 — Administration", "Utilisateurs, rôles, paramètres organisation"),
-            Map.entry("08 — Audit", "Journal d'audit et export conformité")
+            Map.entry("08 — Audit", "Journal d'audit et export conformité"),
+            Map.entry("09 — Notifications", "Inbox in-app et push temps réel WebSocket/STOMP"),
+            Map.entry("10 — Portail usager", "Accès citoyen : suivi dossier, documents, RDV"),
+            Map.entry("11 — Reporting", "Reporting mensuel et exports Excel/CSV"),
+            Map.entry("12 — SMS", "Statut du canal SMS RDV (optionnel)")
     );
 
     private static final Map<String, OperationMeta> OPERATIONS = new LinkedHashMap<>();
@@ -44,6 +48,10 @@ public final class OpenApiOperationCatalog {
         dashboard();
         admin();
         audit();
+        notifications();
+        portal();
+        reporting();
+        sms();
     }
 
     public static Optional<OperationMeta> resolve(String handlerKey) {
@@ -386,6 +394,82 @@ public final class OpenApiOperationCatalog {
         put("AuditController#export", "08 — Audit",
                 "Exporter le journal",
                 "Export CSV/JSON du journal d'audit pour conformité.",
+                false);
+    }
+
+    private static void notifications() {
+        put("NotificationController#list", "09 — Notifications",
+                "Lister les notifications",
+                "Inbox paginée de l'utilisateur authentifié.",
+                false);
+        put("NotificationController#unreadCount", "09 — Notifications",
+                "Compteur non lues",
+                "Nombre de notifications non lues pour le badge UI.",
+                false);
+        put("NotificationController#markRead", "09 — Notifications",
+                "Marquer comme lue",
+                "Marque une notification comme lue.",
+                false);
+        put("NotificationController#markAllRead", "09 — Notifications",
+                "Tout marquer comme lu",
+                "Marque toutes les notifications de l'utilisateur comme lues.",
+                false);
+    }
+
+    private static void portal() {
+        put("PortalController#requestAccess", "10 — Portail usager",
+                "Demander un lien d'accès",
+                "Envoie un magic link si référence dossier + email usager correspondent (réponse uniforme).",
+                true);
+        put("PortalController#openSession", "10 — Portail usager",
+                "Ouvrir une session portail",
+                "Échange le magic link contre un token de session (8 h).",
+                true);
+        put("PortalController#dossier", "10 — Portail usager",
+                "Suivi du dossier",
+                "Résumé public du dossier lié à la session.",
+                true);
+        put("PortalController#documents", "10 — Portail usager",
+                "Lister les documents",
+                "Pièces jointes du dossier (session portail).",
+                true);
+        put("PortalController#uploadDocument", "10 — Portail usager",
+                "Déposer un document",
+                "Upload MinIO rattaché au dossier de la session.",
+                true);
+        put("PortalController#disponibilites", "10 — Portail usager",
+                "Créneaux disponibles",
+                "Créneaux pour le type de service du dossier.",
+                true);
+        put("PortalController#createRendezVous", "10 — Portail usager",
+                "Prendre rendez-vous",
+                "Crée un RDV lié à l'usager et au dossier de la session.",
+                true);
+    }
+
+    private static void reporting() {
+        put("ReportingController#mensuel", "11 — Reporting",
+                "Reporting mensuel JSON",
+                "Synthèse du mois : dossiers, encaissements, RDV, documents, délai moyen.",
+                false);
+        put("ReportingController#mensuelExcel", "11 — Reporting",
+                "Export Excel mensuel",
+                "Classeur Excel multi-feuilles du reporting mensuel.",
+                false);
+        put("ReportingController#dossiersCsv", "11 — Reporting",
+                "Export CSV dossiers",
+                "Liste des dossiers créés sur le mois.",
+                false);
+        put("ReportingController#rdvCsv", "11 — Reporting",
+                "Export CSV rendez-vous",
+                "Liste des rendez-vous du mois.",
+                false);
+    }
+
+    private static void sms() {
+        put("SmsStatusController#status", "12 — SMS",
+                "Statut du canal SMS",
+                "Indique si le SMS RDV est activé et quel provider est utilisé (présent seulement si enabled=true).",
                 false);
     }
 

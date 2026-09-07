@@ -1,0 +1,30 @@
+{
+  "title": "Reporting mensuel",
+  "subtitle": "Synthèse opérationnelle et exports Excel / CSV",
+  "period": "Période",
+  "year": "Année",
+  "month": "Mois",
+  "refresh": "Actualiser",
+  "exports": {
+    "excel": "Export Excel",
+    "dossiersCsv": "CSV dossiers",
+    "rdvCsv": "CSV rendez-vous"
+  },
+  "kpis": {
+    "dossiers": "Dossiers créés",
+    "documents": "Documents déposés",
+    "rdv": "Rendez-vous",
+    "encaissements": "Encaissements",
+    "montant": "Montant perçu",
+    "delai": "Délai moyen (h)"
+  },
+  "sections": {
+    "dossiersByStatus": "Dossiers par statut",
+    "encaissementsByMode": "Encaissements par mode",
+    "encaissementsByService": "Encaissements par service",
+    "rdvByStatus": "RDV par statut"
+  },
+  "empty": "Aucune donnée pour cette période",
+  "loading": "Chargement du reporting…",
+  "forbidden": "Reporting réservé aux superviseurs et administrateurs."
+}

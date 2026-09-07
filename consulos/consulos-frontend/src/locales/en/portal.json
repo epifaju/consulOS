@@ -1,0 +1,48 @@
+{
+  "access": {
+    "title": "Citizen portal",
+    "subtitle": "Track your case with the reference and the email on your file.",
+    "reference": "Case reference",
+    "email": "Email",
+    "submit": "Send access link",
+    "sentTitle": "Check your inbox",
+    "sentBody": "If the details match, a secure link was sent (valid for 1 hour).",
+    "staffLogin": "Staff login",
+    "errors": {
+      "generic": "Could not send the request. Please try again."
+    }
+  },
+  "ouvrir": {
+    "loading": "Opening your space…",
+    "error": "Invalid or expired link. Request a new one."
+  },
+  "shell": {
+    "title": "My case",
+    "logout": "Leave"
+  },
+  "dossier": {
+    "status": "Status",
+    "service": "Service",
+    "submitted": "Submitted on",
+    "due": "Due date",
+    "citizen": "Citizen"
+  },
+  "documents": {
+    "title": "Documents",
+    "empty": "No documents uploaded",
+    "upload": "Upload a document",
+    "type": "Type",
+    "file": "File",
+    "submit": "Send",
+    "success": "Document uploaded"
+  },
+  "rdv": {
+    "title": "Book an appointment",
+    "date": "Date",
+    "slots": "Available slots",
+    "empty": "No slots this day",
+    "book": "Book",
+    "success": "Appointment confirmed",
+    "places": "{{restantes}} / {{max}} places"
+  }
+}

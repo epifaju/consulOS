@@ -24,6 +24,7 @@ const AUTH_NO_REFRESH_PATHS = [
   '/auth/logout',
   '/auth/forgot-password',
   '/auth/reset-password',
+  '/portal/',
 ]
 
 let isRefreshing = false

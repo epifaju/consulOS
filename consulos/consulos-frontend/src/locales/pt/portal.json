@@ -1,0 +1,48 @@
+{
+  "access": {
+    "title": "Portal do utente",
+    "subtitle": "Acompanhe o seu processo com a referência e o email do seu registo.",
+    "reference": "Referência do processo",
+    "email": "Email",
+    "submit": "Receber link de acesso",
+    "sentTitle": "Verifique o seu email",
+    "sentBody": "Se os dados corresponderem, foi enviado um link seguro (válido 1 hora).",
+    "staffLogin": "Área de agentes",
+    "errors": {
+      "generic": "Não foi possível enviar o pedido. Tente novamente."
+    }
+  },
+  "ouvrir": {
+    "loading": "A abrir o seu espaço…",
+    "error": "Link inválido ou expirado. Peça um novo link."
+  },
+  "shell": {
+    "title": "O meu processo",
+    "logout": "Sair"
+  },
+  "dossier": {
+    "status": "Estado",
+    "service": "Serviço",
+    "submitted": "Submetido em",
+    "due": "Prazo",
+    "citizen": "Utente"
+  },
+  "documents": {
+    "title": "Documentos",
+    "empty": "Nenhum documento enviado",
+    "upload": "Enviar um documento",
+    "type": "Tipo",
+    "file": "Ficheiro",
+    "submit": "Enviar",
+    "success": "Documento enviado"
+  },
+  "rdv": {
+    "title": "Marcar consulta",
+    "date": "Data",
+    "slots": "Horários disponíveis",
+    "empty": "Sem horários neste dia",
+    "book": "Reservar",
+    "success": "Marcação confirmada",
+    "places": "{{restantes}} / {{max}} lugares"
+  }
+}

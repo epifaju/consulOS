@@ -8,6 +8,10 @@
   "logout": "Déconnexion",
   "profile": "Profil",
   "notifications": "Notifications",
+  "notificationPanel": {
+    "empty": "Aucune notification",
+    "markAllRead": "Tout marquer lu"
+  },
   "errors": {
     "accessDenied": "Accès refusé — vous n'avez pas les droits pour cette action.",
     "unauthorized": "Session expirée ou identifiants incorrects.",
@@ -21,6 +25,7 @@
     "rendezvous": "Rendez-vous",
     "documents": "Documents",
     "caisse": "Caisse",
+    "reporting": "Reporting",
     "administration": "Administration"
   }
 }

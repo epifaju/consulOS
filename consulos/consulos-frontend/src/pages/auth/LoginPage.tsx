@@ -162,6 +162,12 @@ export function LoginPage() {
                   t('submit')
                 )}
               </Button>
+
+              <p className="text-center text-sm">
+                <Link to="/portal" className="text-accent hover:underline">
+                  {t('portalLink')}
+                </Link>
+              </p>
             </form>
           </Form>
         </CardContent>

@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { AppShell } from '@/components/layout/AppShell'
 import { ProtectedRoute } from '@/router/ProtectedRoute'
 
+const PortalAccessPage = lazy(() => import('@/pages/portal/PortalAccessPage'))
+const PortalOuvrirPage = lazy(() => import('@/pages/portal/PortalOuvrirPage'))
+const PortalDossierPage = lazy(() => import('@/pages/portal/PortalDossierPage'))
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage'))
 const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPasswordPage'))
 const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'))
@@ -17,6 +20,7 @@ const DossierDetailPage = lazy(() => import('@/pages/dossiers/DossierDetailPage'
 const AgendaPage = lazy(() => import('@/pages/rendezvous/AgendaPage'))
 const DocumentsPage = lazy(() => import('@/pages/DocumentsPage'))
 const CaissePage = lazy(() => import('@/pages/encaissement/CaissePage'))
+const ReportingPage = lazy(() => import('@/pages/reporting/ReportingPage'))
 const RecuPage = lazy(() => import('@/pages/encaissement/RecuPage'))
 const AdminLayout = lazy(() => import('@/pages/administration/AdminLayout'))
 const UsersPage = lazy(() => import('@/pages/administration/UsersPage'))
@@ -41,6 +45,9 @@ export function AppRouter() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/portal" element={<PortalAccessPage />} />
+          <Route path="/portal/ouvrir" element={<PortalOuvrirPage />} />
+          <Route path="/portal/dossier" element={<PortalDossierPage />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<AppShell />}>
               <Route index element={<DashboardPage />} />
@@ -57,6 +64,7 @@ export function AppRouter() {
               <Route path="documents" element={<DocumentsPage />} />
               <Route path="caisse" element={<CaissePage />} />
               <Route path="caisse/recu/:id" element={<RecuPage />} />
+              <Route path="reporting" element={<ReportingPage />} />
               <Route element={<ProtectedRoute roles={['ROLE_ADMIN']} />}>
                 <Route path="administration" element={<AdminLayout />}>
                   <Route index element={<Navigate to="users" replace />} />

@@ -52,7 +52,7 @@ Vérifications :
 
 | Frontend | http://localhost:3000 | Page login ConsulOS |
 
-| Swagger | http://localhost:8082/swagger-ui/index.html | Groupes 01-auth … 08-administration (+ queries / assign) |
+| Swagger | http://localhost:8082/swagger-ui/index.html | Groupes 01-auth … 11-reporting |
 
 | E2E (optionnel) | `cd consulos\consulos-frontend; npm run test:e2e` | 19/19 |
 
@@ -137,6 +137,8 @@ Mot de passe pour tous : **`Admin1234!`**
 
 
 RDV planifié pour Mamadou Camara (lendemain 10h00).
+
+> **Portail usager** : http://localhost:3000/portal — ex. `DOS-2026-00001` + `mamadou.camara@email.com` → lien dans MailHog (`http://localhost:8025`).
 
 
 
@@ -336,6 +338,14 @@ Toujours en **agent** :
 
 - **Documents** : upload dossier, onglet usager, page globale filtrable
 
+- **Notifications (Phase 2)** : cloche header + WebSocket STOMP (`/api/v1/ws`) — transition / assignation dossier
+
+- **Portail usager (Phase 2)** : `/portal` — magic link (réf. + email) → suivi dossier, dépôt documents, prise RDV
+
+- **Reporting (Phase 2)** : menu Reporting (superviseur/admin) — synthèse mensuelle + Excel / CSV
+
+- **SMS RDV (Phase 2, optionnel)** : `CONSULOS_SMS_ENABLED=true` — confirmation / annulation / rappel en complément email (provider `log` ou `twilio`)
+
 - **Tests** : 19 scénarios Playwright (auth, dossier, documents, caisse, exports, perf < 2 s)
 
 - **Secrets** : clés dans `secrets/`, jamais commitées (`.gitignore`)
@@ -367,6 +377,8 @@ Toujours en **agent** :
 | PostgreSQL refusé | `.\scripts\start-dev-infra.ps1` (Docker, port **5433**) |
 
 | Rate limit login | Attendre 15 min ou redémarrer le backend |
+
+| SMS RDV (optionnel) | Dans `.env` : `CONSULOS_SMS_ENABLED=true` + `CONSULOS_SMS_PROVIDER=log` → logs `[SMS-LOG]` ; Twilio : `provider=twilio` + SID/token/from |
 
 
 

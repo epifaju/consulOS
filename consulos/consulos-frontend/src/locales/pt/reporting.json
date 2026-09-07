@@ -1,0 +1,30 @@
+{
+  "title": "Relatório mensal",
+  "subtitle": "Síntese operacional e exportações Excel / CSV",
+  "period": "Período",
+  "year": "Ano",
+  "month": "Mês",
+  "refresh": "Atualizar",
+  "exports": {
+    "excel": "Exportar Excel",
+    "dossiersCsv": "CSV processos",
+    "rdvCsv": "CSV marcações"
+  },
+  "kpis": {
+    "dossiers": "Processos criados",
+    "documents": "Documentos enviados",
+    "rdv": "Marcações",
+    "encaissements": "Pagamentos",
+    "montant": "Montante recebido",
+    "delai": "Prazo médio (h)"
+  },
+  "sections": {
+    "dossiersByStatus": "Processos por estado",
+    "encaissementsByMode": "Pagamentos por modo",
+    "encaissementsByService": "Pagamentos por serviço",
+    "rdvByStatus": "Marcações por estado"
+  },
+  "empty": "Sem dados para este período",
+  "loading": "A carregar relatório…",
+  "forbidden": "Relatório reservado a supervisores e administradores."
+}
