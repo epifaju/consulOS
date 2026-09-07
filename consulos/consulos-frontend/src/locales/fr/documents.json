@@ -30,13 +30,29 @@
       "network": "Erreur réseau lors de l'envoi"
     }
   },
+  "filters": {
+    "search": "Rechercher par nom de fichier…",
+    "dossierReference": "Référence dossier…",
+    "typeDocument": "Type de document",
+    "allTypes": "Tous les types",
+    "dateDebut": "Date début",
+    "dateFin": "Date fin"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} / {{total}}"
+  },
   "list": {
     "add": "Ajouter un document",
     "empty": "Aucun document pour ce dossier",
+    "emptyGlobal": "Aucun document ne correspond aux filtres",
     "confirmDelete": "Supprimer ce document définitivement ?",
     "columns": {
       "name": "Nom",
       "type": "Type",
+      "dossier": "Dossier",
+      "usager": "Usager",
       "statut": "Statut contrôle",
       "size": "Taille",
       "date": "Date",

@@ -15,9 +15,11 @@ import {
 } from '@/hooks/useDossiers'
 import { WorkflowTimeline } from '@/components/dossiers/WorkflowTimeline'
 import { ChecklistViewer } from '@/components/dossiers/ChecklistViewer'
+import { AssignAgentPanel } from '@/components/dossiers/AssignAgentPanel'
 import { DocumentList } from '@/components/documents/DocumentList'
 import { getStatutBadgeClass } from '@/utils/dossierStatus'
 import { useAuthStore } from '@/stores/authStore'
+import { canAssignDossierAgent } from '@/utils/rolePermissions'
 import type { DossierStatut } from '@/types/dossier'
 
 function hasRole(role: string, ...allowed: string[]): boolean {
@@ -119,6 +121,7 @@ export function DossierDetailPage() {
   }
 
   const actions = getActions()
+  const canAssign = canAssignDossierAgent(userRole)
 
   return (
     <div className="space-y-6">
@@ -194,7 +197,17 @@ export function DossierDetailPage() {
           <TabsTrigger value="commentaires">{t('tabs.commentaires')}</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="info" className="mt-4">
+        <TabsContent value="info" className="mt-4 space-y-4">
+          {canAssign && (
+            <Card>
+              <CardContent className="pt-6">
+                <AssignAgentPanel
+                  dossierId={dossier.id}
+                  currentAgentId={dossier.agentId}
+                />
+              </CardContent>
+            </Card>
+          )}
           <Card>
             <CardContent className="grid gap-4 pt-6 sm:grid-cols-2">
               <div>

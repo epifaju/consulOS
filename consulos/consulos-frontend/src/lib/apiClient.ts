@@ -1,4 +1,6 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios'
+import { resolveApiErrorMessage, shouldToastApiError } from '@/lib/apiErrors'
+import { toast } from '@/hooks/use-toast'
 import { useAuthStore } from '@/stores/authStore'
 
 export const apiClient = axios.create({
@@ -36,6 +38,13 @@ apiClient.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+
+    if (shouldToastApiError(error)) {
+      toast({
+        variant: 'destructive',
+        title: resolveApiErrorMessage(error),
+      })
+    }
 
     if (error.response?.status !== 401 || originalRequest._retry) {
       return Promise.reject(error)

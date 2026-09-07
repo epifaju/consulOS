@@ -22,6 +22,8 @@
   "actions": {
     "new": "New user",
     "edit": "Edit",
+    "exportFichePdf": "PDF profile",
+    "exportFichePdfPending": "Generating PDF…",
     "exportRgpd": "Export GDPR data",
     "exportRgpdPending": "Exporting..."
   },
@@ -46,10 +48,25 @@
     "documents": "Documents",
     "history": "History"
   },
-  "placeholders": {
-    "dossiers": "Cases available in BLOC 3",
-    "documents": "Available in BLOC 5",
-    "history": "Event history coming soon"
+  "documents": {
+    "empty": "No documents linked to this citizen (directly or via their cases)."
+  },
+  "dossiers": {
+    "empty": "No cases linked to this user.",
+    "columns": {
+      "reference": "Reference",
+      "type": "Service type",
+      "statut": "Status",
+      "date": "Created"
+    }
+  },
+  "history": {
+    "empty": "No activity recorded for this user.",
+    "categories": {
+      "DOSSIER": "Case",
+      "RDV": "Appointment",
+      "ENCAISSEMENT": "Payment"
+    }
   },
   "fields": {
     "nom": "Last name",

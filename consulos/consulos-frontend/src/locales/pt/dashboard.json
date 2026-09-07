@@ -2,6 +2,7 @@
   "title": "Painel",
   "loading": "A carregar…",
   "empty": "Sem dados",
+  "welcomeAgent": "Utilize o menu para aceder a utentes, processos ou marcações.",
   "kpis": {
     "dossiersOuverts": "Processos abertos",
     "enAttente": "Aguardam validação",

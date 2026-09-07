@@ -30,13 +30,29 @@
       "network": "Erro de rede durante o envio"
     }
   },
+  "filters": {
+    "search": "Pesquisar por nome de ficheiro…",
+    "dossierReference": "Referência do processo…",
+    "typeDocument": "Tipo de documento",
+    "allTypes": "Todos os tipos",
+    "dateDebut": "Data início",
+    "dateFin": "Data fim"
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Seguinte",
+    "page": "Página {{current}} / {{total}}"
+  },
   "list": {
     "add": "Adicionar documento",
     "empty": "Nenhum documento para este processo",
+    "emptyGlobal": "Nenhum documento corresponde aos filtros",
     "confirmDelete": "Eliminar este documento permanentemente?",
     "columns": {
       "name": "Nome",
       "type": "Tipo",
+      "dossier": "Processo",
+      "usager": "Utente",
       "statut": "Estado de controlo",
       "size": "Tamanho",
       "date": "Data",

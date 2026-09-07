@@ -22,6 +22,8 @@
   "actions": {
     "new": "Novo utente",
     "edit": "Editar",
+    "exportFichePdf": "Ficha PDF",
+    "exportFichePdfPending": "A gerar PDF…",
     "exportRgpd": "Exportar dados RGPD",
     "exportRgpdPending": "A exportar..."
   },
@@ -46,10 +48,25 @@
     "documents": "Documentos",
     "history": "Histórico"
   },
-  "placeholders": {
-    "dossiers": "Processos disponíveis no BLOC 3",
-    "documents": "Disponível no BLOC 5",
-    "history": "Histórico de eventos em breve"
+  "documents": {
+    "empty": "Nenhum documento associado a este utente (diretamente ou via os seus processos)."
+  },
+  "dossiers": {
+    "empty": "Nenhum processo associado a este utente.",
+    "columns": {
+      "reference": "Referência",
+      "type": "Tipo de serviço",
+      "statut": "Estado",
+      "date": "Criado em"
+    }
+  },
+  "history": {
+    "empty": "Nenhuma atividade registada para este utente.",
+    "categories": {
+      "DOSSIER": "Processo",
+      "RDV": "Marcação",
+      "ENCAISSEMENT": "Pagamento"
+    }
   },
   "fields": {
     "nom": "Apelido",

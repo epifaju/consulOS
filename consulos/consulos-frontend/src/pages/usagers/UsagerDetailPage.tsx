@@ -5,10 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useExportUsagerRgpd } from '@/hooks/useUsagerExports'
+import { UsagerActivityTimeline } from '@/components/usagers/UsagerActivityTimeline'
+import { UsagerDocumentsList } from '@/components/usagers/UsagerDocumentsList'
+import { UsagerDossiersList } from '@/components/usagers/UsagerDossiersList'
+import { useExportUsagerFichePdf, useExportUsagerRgpd } from '@/hooks/useUsagerExports'
+import { useUsagerActivity, useUsagerDocuments, useUsagerDossiers } from '@/hooks/useUsagerQueries'
 import { useUsager } from '@/hooks/useUsagers'
 import { useAuthStore } from '@/stores/authStore'
-import { canExportUsagerRgpd, canWriteUsagers } from '@/utils/rolePermissions'
+import { canExportUsagerFichePdf, canExportUsagerRgpd, canWriteUsagers } from '@/utils/rolePermissions'
 
 function InfoField({ label, value }: { label: string; value: string | null | undefined }) {
   return (
@@ -25,9 +29,14 @@ export function UsagerDetailPage() {
   const navigate = useNavigate()
   const { data: usager, isLoading } = useUsager(id ?? '')
   const exportRgpd = useExportUsagerRgpd()
+  const exportFichePdf = useExportUsagerFichePdf()
+  const dossiersQuery = useUsagerDossiers(id ?? '')
+  const documentsQuery = useUsagerDocuments(id ?? '')
+  const activityQuery = useUsagerActivity(id ?? '')
   const userRole = useAuthStore((state) => state.user?.role)
   const canWrite = canWriteUsagers(userRole)
   const canExportRgpd = canExportUsagerRgpd(userRole)
+  const canExportPdf = canExportUsagerFichePdf(userRole)
 
   if (isLoading) {
     return <p className="text-muted-foreground">{t('loading')}</p>
@@ -58,6 +67,16 @@ export function UsagerDetailPage() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
+          {canExportPdf && (
+            <Button
+              variant="outline"
+              disabled={exportFichePdf.isPending}
+              onClick={() => exportFichePdf.mutate(usager.id)}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              {exportFichePdf.isPending ? t('actions.exportFichePdfPending') : t('actions.exportFichePdf')}
+            </Button>
+          )}
           {canExportRgpd && (
             <Button
               variant="outline"
@@ -108,24 +127,42 @@ export function UsagerDetailPage() {
 
         <TabsContent value="dossiers">
           <Card>
-            <CardContent className="py-8 text-center text-muted-foreground text-sm">
-              {t('placeholders.dossiers')}
+            <CardHeader>
+              <CardTitle>{t('tabs.dossiers')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <UsagerDossiersList
+                dossiers={dossiersQuery.data ?? []}
+                isLoading={dossiersQuery.isLoading}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="documents">
           <Card>
-            <CardContent className="py-8 text-center text-muted-foreground text-sm">
-              {t('placeholders.documents')}
+            <CardHeader>
+              <CardTitle>{t('tabs.documents')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <UsagerDocumentsList
+                documents={documentsQuery.data ?? []}
+                isLoading={documentsQuery.isLoading}
+              />
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="history">
           <Card>
-            <CardContent className="py-8 text-center text-muted-foreground text-sm">
-              {t('placeholders.history')}
+            <CardHeader>
+              <CardTitle>{t('tabs.history')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <UsagerActivityTimeline
+                entries={activityQuery.data ?? []}
+                isLoading={activityQuery.isLoading}
+              />
             </CardContent>
           </Card>
         </TabsContent>

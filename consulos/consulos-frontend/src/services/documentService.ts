@@ -2,12 +2,18 @@ import { apiClient } from '@/lib/apiClient'
 import type { ApiResponse } from '@/types/api'
 import type {
   DocumentItem,
+  DocumentListItem,
+  DocumentListParams,
   DocumentUploadParams,
   DownloadUrl,
+  PageResponse,
   StatutControleUpdate,
 } from '@/types/document'
 
 export const documentService = {
+  list: (params: DocumentListParams) =>
+    apiClient.get<ApiResponse<PageResponse<DocumentListItem>>>('/document-queries', { params }),
+
   listByDossier: (dossierId: string) =>
     apiClient.get<ApiResponse<DocumentItem[]>>(`/dossiers/${dossierId}/documents`),
 

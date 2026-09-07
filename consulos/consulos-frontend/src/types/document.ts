@@ -7,6 +7,50 @@ export type TypeDocument =
   | 'FORMULAIRE'
   | 'AUTRE'
 
+export const DOCUMENT_TYPES: readonly TypeDocument[] = [
+  'PIECE_IDENTITE',
+  'JUSTIFICATIF',
+  'PHOTO',
+  'FORMULAIRE',
+  'AUTRE',
+] as const
+
+export const STATUTS_CONTROLE: readonly StatutControle[] = [
+  'RECU',
+  'LISIBLE',
+  'COMPLET',
+  'A_CORRIGER',
+  'VALIDE',
+] as const
+
+export interface PageResponse<T> {
+  content: T[]
+  totalElements: number
+  totalPages: number
+  page: number
+  size: number
+  first: boolean
+  last: boolean
+}
+
+export interface DocumentListItem extends DocumentItem {
+  dossierReference: string | null
+  usagerNom: string | null
+  usagerPrenom: string | null
+}
+
+export interface DocumentListParams {
+  page?: number
+  size?: number
+  sort?: string
+  typeDocument?: TypeDocument
+  statutControle?: StatutControle[]
+  search?: string
+  dossierReference?: string
+  dateDebut?: string
+  dateFin?: string
+}
+
 export interface DocumentItem {
   id: string
   dossierId: string | null

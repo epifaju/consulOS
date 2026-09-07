@@ -16,11 +16,14 @@ public final class OpenApiOperationCatalog {
             Map.entry("01 — Authentification", "Connexion JWT RS256, refresh httpOnly, profil utilisateur"),
             Map.entry("02 — Usagers", "Référentiel usagers, recherche, doublons, dossiers liés"),
             Map.entry("02 — Usagers — RGPD", "Export portabilité des données personnelles"),
+            Map.entry("02 — Usagers — Requêtes", "Dossiers liés et historique d'activité"),
             Map.entry("03 — Dossiers", "Cycle de vie dossier, workflow, commentaires, historique"),
             Map.entry("03 — Types de service", "Catalogue des prestations consulaires"),
             Map.entry("04 — Rendez-vous", "Agenda, créneaux, disponibilités"),
             Map.entry("04 — Paramètres RDV", "Créneaux horaires et jours de fermeture"),
             Map.entry("05 — Documents", "Upload MinIO, contrôle qualité, téléchargement"),
+            Map.entry("05 — Documents — Requêtes", "Liste globale filtrée des documents"),
+            Map.entry("03 — Dossiers — Affectation", "Liste agents et affectation agent responsable"),
             Map.entry("06 — Encaissements", "Paiements, journal de caisse, reçus PDF"),
             Map.entry("06 — Encaissements — Exports", "Exports Excel du journal de caisse"),
             Map.entry("06 — Tarifs", "Grille tarifaire par type de service"),
@@ -115,6 +118,22 @@ public final class OpenApiOperationCatalog {
                 "Exporter les données RGPD",
                 "Télécharge un export JSON (portabilité) : profil, dossiers, RDV, encaissements, documents.",
                 false);
+        put("UsagerQueryController#dossiers", "02 — Usagers — Requêtes",
+                "Lister les dossiers d'un usager",
+                "Retourne les dossiers actifs liés à un usager (remplace le stub legacy).",
+                false);
+        put("UsagerQueryController#activity", "02 — Usagers — Requêtes",
+                "Historique d'activité usager",
+                "Timeline agrégée : dossiers créés, rendez-vous, encaissements.",
+                false);
+        put("UsagerDocumentQueryController#documents", "02 — Usagers — Requêtes",
+                "Documents d'un usager",
+                "Liste synthétique des documents rattachés à un usager.",
+                false);
+        put("UsagerFichePdfController#exportFichePdf", "02 — Usagers",
+                "Exporter la fiche usager PDF",
+                "Génère un PDF de la fiche usager (identité, contacts, dossiers).",
+                false);
     }
 
     private static void dossiers() {
@@ -153,6 +172,14 @@ public final class OpenApiOperationCatalog {
         put("TypeServiceController#list", "03 — Types de service",
                 "Lister les types de service",
                 "Catalogue des prestations disponibles pour la création de dossiers.",
+                false);
+        put("DossierAssignController#listAgents", "03 — Dossiers — Affectation",
+                "Lister les agents assignables",
+                "Agents actifs de l'organisation pour affectation dossier.",
+                false);
+        put("DossierAssignController#assignAgent", "03 — Dossiers — Affectation",
+                "Affecter un agent au dossier",
+                "Assigne ou réassigne l'agent responsable d'un dossier.",
                 false);
     }
 
@@ -235,6 +262,10 @@ public final class OpenApiOperationCatalog {
         put("DossierDocumentController#listByDossier", "05 — Documents",
                 "Documents d'un dossier",
                 "Liste les pièces jointes actives d'un dossier.",
+                false);
+        put("DocumentQueryController#list", "05 — Documents — Requêtes",
+                "Liste globale des documents",
+                "Recherche paginée multi-filtres (nom, dossier, type, statut, dates).",
                 false);
     }
 

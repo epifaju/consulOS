@@ -18,6 +18,12 @@
     "confirm": "Confirmar",
     "cancel": "Cancelar"
   },
+  "assign": {
+    "title": "Agente atribuído",
+    "selectPlaceholder": "Selecionar um agente…",
+    "submit": "Atribuir",
+    "pending": "A atribuir…"
+  },
   "columns": {
     "reference": "Referência",
     "usager": "Utente",
@@ -93,9 +99,6 @@
     "empty": "Sem histórico",
     "transition": "{{from}} → {{to}}",
     "creation": "Criação — {{statut}}"
-  },
-  "documents": {
-    "placeholder": "Módulo de documentos disponível no BLOCO 5"
   },
   "commentaires": {
     "placeholder": "Adicionar comentário…",

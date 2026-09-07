@@ -37,6 +37,9 @@ function resolveRedirectPath(role: string, returnUrl: string | null): string {
   if (role === 'ROLE_ADMIN') {
     return '/administration'
   }
+  if (role === 'ROLE_CAISSIER') {
+    return '/caisse'
+  }
   return '/'
 }
 

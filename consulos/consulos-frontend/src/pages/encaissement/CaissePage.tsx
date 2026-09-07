@@ -69,11 +69,14 @@ export function CaissePage() {
   })
 
   const searchQuery = useSearchUsagers(usagerSearch)
-  const dossiersQuery = useDossiers({
-    page: 0,
-    size: 50,
-    usagerId: selectedUsager?.id,
-  })
+  const dossiersQuery = useDossiers(
+    {
+      page: 0,
+      size: 50,
+      usagerId: selectedUsager?.id,
+    },
+    Boolean(selectedUsager?.id),
+  )
   const tarifsQuery = useTarifs()
   const createMutation = useCreateEncaissement()
 

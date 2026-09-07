@@ -11,11 +11,14 @@ test.describe('Dashboard', () => {
     await expect(page.getByText(/rdv du jour|today's appointments|marcações hoje/i)).toBeVisible()
   })
 
-  test('agent sees dashboard page with limited widgets', async ({ page }) => {
+  test('agent sees dashboard welcome without supervision widgets', async ({ page }) => {
     await loginAs(page, 'agent')
     await expect(page.getByRole('heading', { name: /tableau de bord|dashboard|painel/i })).toBeVisible({
       timeout: 15_000,
     })
-    await expect(page.getByText(/alertes actives|active alerts|alertas ativos/i)).toBeVisible()
+    await expect(
+      page.getByText(/utilisez le menu|use the menu|utilize o menu/i),
+    ).toBeVisible()
+    await expect(page.getByText(/alertes actives|active alerts|alertas ativos/i)).toHaveCount(0)
   })
 })

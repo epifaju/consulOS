@@ -12,6 +12,14 @@ import type {
   TypeService,
 } from '@/types/dossier'
 
+export interface AgentOption {
+  id: string
+  nom: string
+  prenom: string
+  email: string
+  roleCode: string | null
+}
+
 export const dossierService = {
   list: (params: DossierListParams) =>
     apiClient.get<ApiResponse<PageResponse<DossierSummary>>>('/dossiers', { params }),
@@ -33,4 +41,10 @@ export const dossierService = {
 
   listTypesService: () =>
     apiClient.get<ApiResponse<TypeService[]>>('/types-service'),
+
+  listAssignableAgents: () =>
+    apiClient.get<ApiResponse<AgentOption[]>>('/dossier-assign/agents'),
+
+  assignAgent: (id: string, agentId: string) =>
+    apiClient.post<ApiResponse<DossierDetail>>(`/dossiers/${id}/assign-agent`, { agentId }),
 }

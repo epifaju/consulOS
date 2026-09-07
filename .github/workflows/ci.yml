@@ -1,0 +1,151 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend (unit + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: consulos/consulos-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: consulos/consulos-frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  backend:
+    name: Backend (Maven test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+          cache-dependency-path: consulos/consulos-backend/pom.xml
+      - name: Start infra (Postgres / Redis / MinIO / Mailhog)
+        run: docker compose up -d postgres redis minio mailhog
+      - name: Wait for Postgres
+        run: |
+          for i in $(seq 1 40); do
+            if docker compose exec -T postgres pg_isready -U consulos; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Postgres not ready" >&2
+          exit 1
+      - name: Generate JWT keys
+        run: chmod +x scripts/generate-jwt-keys.sh && ./scripts/generate-jwt-keys.sh
+      - name: Maven test
+        working-directory: consulos/consulos-backend
+        env:
+          JWT_PRIVATE_KEY_PATH: ${{ github.workspace }}/secrets/jwt-private.pem
+          JWT_PUBLIC_KEY_PATH: ${{ github.workspace }}/secrets/jwt-public.pem
+          SPRING_PROFILES_ACTIVE: dev
+        run: mvn -B test
+
+  e2e-smoke:
+    name: E2E smoke (auth + dashboard + documents)
+    runs-on: ubuntu-latest
+    needs: [frontend, backend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+          cache-dependency-path: consulos/consulos-backend/pom.xml
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: consulos/consulos-frontend/package-lock.json
+      - name: Start infra
+        run: docker compose up -d postgres redis minio mailhog
+      - name: Wait for Postgres
+        run: |
+          for i in $(seq 1 40); do
+            if docker compose exec -T postgres pg_isready -U consulos; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+      - name: Generate JWT keys
+        run: chmod +x scripts/generate-jwt-keys.sh && ./scripts/generate-jwt-keys.sh
+      - name: Build backend
+        working-directory: consulos/consulos-backend
+        run: mvn -B -DskipTests package
+      - name: Start backend
+        working-directory: consulos/consulos-backend
+        env:
+          JWT_PRIVATE_KEY_PATH: ${{ github.workspace }}/secrets/jwt-private.pem
+          JWT_PUBLIC_KEY_PATH: ${{ github.workspace }}/secrets/jwt-public.pem
+          SPRING_PROFILES_ACTIVE: dev
+          SERVER_PORT: "8082"
+        run: |
+          nohup java -jar target/consulos-backend-0.0.1-SNAPSHOT.jar > /tmp/consulos-backend.log 2>&1 &
+          echo $! > /tmp/consulos-backend.pid
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:8082/api/v1/actuator/health >/dev/null; then
+              echo "Backend UP"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Backend failed to start" >&2
+          tail -n 200 /tmp/consulos-backend.log || true
+          exit 1
+      - name: Install frontend deps + Playwright
+        working-directory: consulos/consulos-frontend
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Start frontend (E2E port)
+        working-directory: consulos/consulos-frontend
+        run: |
+          nohup npm run dev:e2e > /tmp/consulos-frontend.log 2>&1 &
+          echo $! > /tmp/consulos-frontend.pid
+          for i in $(seq 1 40); do
+            if curl -sf http://127.0.0.1:3010 >/dev/null; then
+              echo "Frontend UP"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Frontend failed to start" >&2
+          tail -n 100 /tmp/consulos-frontend.log || true
+          exit 1
+      - name: Playwright smoke
+        working-directory: consulos/consulos-frontend
+        env:
+          CI: "true"
+          PLAYWRIGHT_PORT: "3010"
+        run: npx playwright test e2e/auth.spec.ts e2e/dashboard.spec.ts e2e/documents.spec.ts
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            consulos/consulos-frontend/test-results
+            /tmp/consulos-backend.log
+            /tmp/consulos-frontend.log
+          if-no-files-found: ignore

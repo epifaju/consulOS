@@ -22,6 +22,8 @@
   "actions": {
     "new": "Nouvel usager",
     "edit": "Modifier",
+    "exportFichePdf": "Fiche PDF",
+    "exportFichePdfPending": "Génération PDF…",
     "exportRgpd": "Exporter RGPD",
     "exportRgpdPending": "Export en cours..."
   },
@@ -46,10 +48,25 @@
     "documents": "Documents",
     "history": "Historique"
   },
-  "placeholders": {
-    "dossiers": "Les dossiers seront disponibles au BLOC 3",
-    "documents": "Disponible au BLOC 5",
-    "history": "Historique des événements à venir"
+  "documents": {
+    "empty": "Aucun document lié à cet usager (directement ou via ses dossiers)."
+  },
+  "dossiers": {
+    "empty": "Aucun dossier lié à cet usager.",
+    "columns": {
+      "reference": "Référence",
+      "type": "Type de service",
+      "statut": "Statut",
+      "date": "Créé le"
+    }
+  },
+  "history": {
+    "empty": "Aucune activité enregistrée pour cet usager.",
+    "categories": {
+      "DOSSIER": "Dossier",
+      "RDV": "Rendez-vous",
+      "ENCAISSEMENT": "Encaissement"
+    }
   },
   "fields": {
     "nom": "Nom",

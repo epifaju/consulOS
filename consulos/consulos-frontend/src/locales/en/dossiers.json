@@ -18,6 +18,12 @@
     "confirm": "Confirm",
     "cancel": "Cancel"
   },
+  "assign": {
+    "title": "Assigned agent",
+    "selectPlaceholder": "Select an agent…",
+    "submit": "Assign",
+    "pending": "Assigning…"
+  },
   "columns": {
     "reference": "Reference",
     "usager": "Citizen",
@@ -93,9 +99,6 @@
     "empty": "No history",
     "transition": "{{from}} → {{to}}",
     "creation": "Created — {{statut}}"
-  },
-  "documents": {
-    "placeholder": "Documents module available in BLOCK 5"
   },
   "commentaires": {
     "placeholder": "Add a comment…",

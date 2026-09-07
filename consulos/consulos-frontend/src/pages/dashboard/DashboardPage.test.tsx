@@ -41,6 +41,11 @@ vi.mock('@/hooks/useDashboard', () => ({
   useAgentsCharge: () => ({ data: [] }),
 }))
 
+vi.mock('@/stores/authStore', () => ({
+  useAuthStore: (selector: (state: { user: { role: string } }) => unknown) =>
+    selector({ user: { role: 'ROLE_SUPERVISEUR' } }),
+}))
+
 function renderPage() {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
   return render(

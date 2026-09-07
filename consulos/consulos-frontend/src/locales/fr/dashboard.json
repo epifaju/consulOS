@@ -2,6 +2,7 @@
   "title": "Tableau de bord",
   "loading": "Chargement…",
   "empty": "Aucune donnée",
+  "welcomeAgent": "Utilisez le menu pour accéder aux usagers, dossiers ou rendez-vous.",
   "kpis": {
     "dossiersOuverts": "Dossiers ouverts",
     "enAttente": "En attente validation",

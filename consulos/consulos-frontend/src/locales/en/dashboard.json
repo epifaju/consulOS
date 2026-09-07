@@ -2,6 +2,7 @@
   "title": "Dashboard",
   "loading": "Loading…",
   "empty": "No data",
+  "welcomeAgent": "Use the menu to access citizens, cases, or appointments.",
   "kpis": {
     "dossiersOuverts": "Open cases",
     "enAttente": "Pending validation",

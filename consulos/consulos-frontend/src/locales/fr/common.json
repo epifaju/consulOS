@@ -8,6 +8,12 @@
   "logout": "Déconnexion",
   "profile": "Profil",
   "notifications": "Notifications",
+  "errors": {
+    "accessDenied": "Accès refusé — vous n'avez pas les droits pour cette action.",
+    "unauthorized": "Session expirée ou identifiants incorrects.",
+    "rateLimit": "Trop de tentatives. Réessayez dans quelques minutes.",
+    "unexpected": "Une erreur inattendue est survenue."
+  },
   "nav": {
     "dashboard": "Tableau de bord",
     "usagers": "Usagers",

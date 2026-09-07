@@ -4,9 +4,12 @@ import type {
   DoublonGroup,
   DoublonParams,
   PageResponse,
+  UsagerActivityItem,
   UsagerCreateRequest,
   UsagerCreateResponse,
   UsagerDetail,
+  UsagerDocumentSummary,
+  UsagerLinkedDossier,
   UsagerListParams,
   UsagerSummary,
   UsagerUpdateRequest,
@@ -35,4 +38,16 @@ export const usagerService = {
 
   exportRgpd: (id: string) =>
     apiClient.get<Blob>(`/usagers/${id}/export-rgpd`, { responseType: 'blob' }),
+
+  exportFichePdf: (id: string) =>
+    apiClient.get<Blob>(`/usagers/${id}/fiche/pdf`, { responseType: 'blob' }),
+
+  listDossiers: (id: string) =>
+    apiClient.get<ApiResponse<UsagerLinkedDossier[]>>(`/usager-queries/${id}/dossiers`),
+
+  listActivity: (id: string) =>
+    apiClient.get<ApiResponse<UsagerActivityItem[]>>(`/usager-queries/${id}/activity`),
+
+  listDocuments: (id: string) =>
+    apiClient.get<ApiResponse<UsagerDocumentSummary[]>>(`/usager-queries/${id}/documents`),
 }

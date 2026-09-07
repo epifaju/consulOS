@@ -6,6 +6,7 @@ import { ProtectedRoute } from '@/router/ProtectedRoute'
 
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage'))
 const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'))
 const DashboardPage = lazy(() => import('@/pages/dashboard/DashboardPage'))
 const UsagersPage = lazy(() => import('@/pages/usagers/UsagersPage'))
 const UsagerDetailPage = lazy(() => import('@/pages/usagers/UsagerDetailPage'))
@@ -39,6 +40,7 @@ export function AppRouter() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<AppShell />}>
               <Route index element={<DashboardPage />} />
@@ -55,12 +57,14 @@ export function AppRouter() {
               <Route path="documents" element={<DocumentsPage />} />
               <Route path="caisse" element={<CaissePage />} />
               <Route path="caisse/recu/:id" element={<RecuPage />} />
-              <Route path="administration" element={<AdminLayout />}>
-                <Route index element={<Navigate to="users" replace />} />
-                <Route path="users" element={<UsersPage />} />
-                <Route path="roles" element={<RolesPage />} />
-                <Route path="parametres" element={<ParametresPage />} />
-                <Route path="audit" element={<AuditLogsPage />} />
+              <Route element={<ProtectedRoute roles={['ROLE_ADMIN']} />}>
+                <Route path="administration" element={<AdminLayout />}>
+                  <Route index element={<Navigate to="users" replace />} />
+                  <Route path="users" element={<UsersPage />} />
+                  <Route path="roles" element={<RolesPage />} />
+                  <Route path="parametres" element={<ParametresPage />} />
+                  <Route path="audit" element={<AuditLogsPage />} />
+                </Route>
               </Route>
             </Route>
           </Route>

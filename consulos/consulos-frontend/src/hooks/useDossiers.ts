@@ -6,13 +6,14 @@ import type {
   DossierTransitionRequest,
 } from '@/types/dossier'
 
-export function useDossiers(params: DossierListParams) {
+export function useDossiers(params: DossierListParams, enabled = true) {
   return useQuery({
     queryKey: ['dossiers', params],
     queryFn: async () => {
       const response = await dossierService.list(params)
       return response.data.data
     },
+    enabled,
   })
 }
 
@@ -76,6 +77,28 @@ export function useAddDossierCommentaire(id: string) {
     mutationFn: (contenu: string) => dossierService.addCommentaire(id, contenu),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ['dossier', id] })
+    },
+  })
+}
+
+export function useAssignableAgents() {
+  return useQuery({
+    queryKey: ['dossier-assign-agents'],
+    queryFn: async () => {
+      const response = await dossierService.listAssignableAgents()
+      return response.data.data
+    },
+  })
+}
+
+export function useAssignDossierAgent(dossierId: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (agentId: string) => dossierService.assignAgent(dossierId, agentId),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['dossier', dossierId] })
+      void queryClient.invalidateQueries({ queryKey: ['dossiers'] })
+      void queryClient.invalidateQueries({ queryKey: ['dossier-historique', dossierId] })
     },
   })
 }

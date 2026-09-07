@@ -30,13 +30,29 @@
       "network": "Network error during upload"
     }
   },
+  "filters": {
+    "search": "Search by file name…",
+    "dossierReference": "Case reference…",
+    "typeDocument": "Document type",
+    "allTypes": "All types",
+    "dateDebut": "Start date",
+    "dateFin": "End date"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} / {{total}}"
+  },
   "list": {
     "add": "Add document",
     "empty": "No documents for this case",
+    "emptyGlobal": "No documents match the filters",
     "confirmDelete": "Permanently delete this document?",
     "columns": {
       "name": "Name",
       "type": "Type",
+      "dossier": "Case",
+      "usager": "Citizen",
       "statut": "Control status",
       "size": "Size",
       "date": "Date",

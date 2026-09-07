@@ -8,6 +8,12 @@
   "logout": "Terminar sessão",
   "profile": "Perfil",
   "notifications": "Notificações",
+  "errors": {
+    "accessDenied": "Acesso negado — não tem permissão para esta ação.",
+    "unauthorized": "Sessão expirada ou credenciais inválidas.",
+    "rateLimit": "Demasiadas tentativas. Tente novamente dentro de alguns minutos.",
+    "unexpected": "Ocorreu um erro inesperado."
+  },
   "nav": {
     "dashboard": "Painel",
     "usagers": "Utentes",

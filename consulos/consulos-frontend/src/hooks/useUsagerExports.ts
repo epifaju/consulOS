@@ -14,3 +14,16 @@ export function useExportUsagerRgpd() {
     },
   })
 }
+
+export function useExportUsagerFichePdf() {
+  return useMutation({
+    mutationFn: async (usagerId: string) => {
+      const response = await usagerService.exportFichePdf(usagerId)
+      const filename = parseFilenameFromDisposition(
+        response.headers['content-disposition'] as string | undefined,
+        `fiche-${usagerId}.pdf`,
+      )
+      downloadBlob(response.data, filename)
+    },
+  })
+}

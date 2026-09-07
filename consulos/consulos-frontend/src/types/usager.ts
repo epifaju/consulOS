@@ -1,3 +1,5 @@
+import type { StatutControle } from '@/types/document'
+
 export type TypeUsager = 'DIASPORA' | 'MANDATAIRE' | 'AUTRE'
 export type TypeDocument = 'PASSEPORT' | 'CNI' | 'TITRE_SEJOUR' | 'AUTRE'
 
@@ -87,4 +89,32 @@ export interface DoublonParams {
   dateNaissance: string
   nationalite: string
   excludeId?: string
+}
+
+export interface UsagerLinkedDossier {
+  id: string
+  numero: string
+  typeService: string | null
+  statut: string | null
+  createdAt: string | null
+}
+
+export interface UsagerDocumentSummary {
+  id: string
+  dossierId: string | null
+  dossierReference: string | null
+  nomOriginal: string
+  typeDocument: string
+  mimeType: string | null
+  tailleOctets: number | null
+  statutControle: StatutControle
+  createdAt: string
+}
+
+export interface UsagerActivityItem {
+  occurredAt: string
+  category: 'DOSSIER' | 'RDV' | 'ENCAISSEMENT'
+  title: string
+  detail: string | null
+  relatedId: string
 }

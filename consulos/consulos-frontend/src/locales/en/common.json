@@ -8,6 +8,12 @@
   "logout": "Logout",
   "profile": "Profile",
   "notifications": "Notifications",
+  "errors": {
+    "accessDenied": "Access denied — you do not have permission for this action.",
+    "unauthorized": "Session expired or invalid credentials.",
+    "rateLimit": "Too many attempts. Please try again in a few minutes.",
+    "unexpected": "An unexpected error occurred."
+  },
   "nav": {
     "dashboard": "Dashboard",
     "usagers": "Users",
