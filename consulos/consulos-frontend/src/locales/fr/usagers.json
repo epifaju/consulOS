@@ -91,6 +91,8 @@
       "identity": "Identité",
       "contact": "Contact",
       "document": "Document"
-    }
+    },
+    "ocrLoading": "Chargement des suggestions OCR…",
+    "ocrApplied": "Champs pré-remplis depuis l'OCR"
   }
 }

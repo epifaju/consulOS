@@ -62,9 +62,13 @@
   "viewer": {
     "fullscreen": "Ecrã inteiro",
     "error": "Não foi possível carregar o documento",
+    "fileMissing": "Ficheiro ausente no armazenamento. Volte a carregar o documento.",
     "noPreview": "Pré-visualização não disponível para este tipo de ficheiro",
     "ocr": "Texto OCR",
     "ocrEmpty": "Nenhum resultado OCR (módulo desativado ou em curso)",
-    "ocrFailed": "Falha OCR"
+    "ocrFailed": "Falha OCR",
+    "ocrPrefillCreate": "Pré-preencher novo utente",
+    "ocrPrefillEdit": "Pré-preencher ficha do utente",
+    "ocrConfidence": "Confiança das sugestões: {{value}} %"
   }
 }

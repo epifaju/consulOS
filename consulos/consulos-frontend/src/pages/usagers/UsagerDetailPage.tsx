@@ -148,6 +148,7 @@ export function UsagerDetailPage() {
               <UsagerDocumentsList
                 documents={documentsQuery.data ?? []}
                 isLoading={documentsQuery.isLoading}
+                usagerId={usager.id}
               />
             </CardContent>
           </Card>

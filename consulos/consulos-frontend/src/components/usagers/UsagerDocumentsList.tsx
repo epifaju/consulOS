@@ -27,9 +27,10 @@ import { formatFileSize, getStatutControleBadgeClass } from '@/utils/documentSta
 interface UsagerDocumentsListProps {
   documents: UsagerDocumentSummary[]
   isLoading: boolean
+  usagerId?: string
 }
 
-export function UsagerDocumentsList({ documents, isLoading }: UsagerDocumentsListProps) {
+export function UsagerDocumentsList({ documents, isLoading, usagerId }: UsagerDocumentsListProps) {
   const { t } = useTranslation(['usagers', 'documents'])
   const userRole = useAuthStore((s) => s.user?.role ?? '')
   const isAdmin = userRole.includes('ADMIN')
@@ -115,6 +116,7 @@ export function UsagerDocumentsList({ documents, isLoading }: UsagerDocumentsLis
                   documentId={doc.id}
                   mimeType={doc.mimeType}
                   nomOriginal={doc.nomOriginal}
+                  usagerId={usagerId}
                 />
                 {isAdmin && (
                   <Button

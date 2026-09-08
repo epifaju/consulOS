@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 import { Loader2 } from 'lucide-react'
@@ -30,6 +30,7 @@ import {
   useUpdateUsager,
   useUsager,
 } from '@/hooks/useUsagers'
+import { useOcrSuggestions } from '@/hooks/useOcr'
 const usagerSchema = z.object({
   nom: z.string().min(1),
   prenom: z.string().min(1),
@@ -51,9 +52,13 @@ export function UsagerFormPage() {
   const isEdit = Boolean(id && id !== 'new')
   const { t } = useTranslation('usagers')
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const ocrDocId = searchParams.get('ocrDocId')
   const [ignoreDoublons, setIgnoreDoublons] = useState(false)
+  const [ocrApplied, setOcrApplied] = useState(false)
 
   const { data: usager, isLoading } = useUsager(isEdit ? (id ?? '') : '')
+  const ocrSuggestions = useOcrSuggestions(ocrDocId, Boolean(ocrDocId))
   const createMutation = useCreateUsager()
   const updateMutation = useUpdateUsager(id ?? '')
   const form = useForm<UsagerFormValues>({
@@ -83,7 +88,7 @@ export function UsagerFormPage() {
   )
 
   useEffect(() => {
-    if (usager && isEdit) {
+    if (usager && isEdit && !ocrApplied) {
       form.reset({
         nom: usager.nom,
         prenom: usager.prenom,
@@ -98,7 +103,36 @@ export function UsagerFormPage() {
         typeDocument: usager.typeDocument ?? undefined,
       })
     }
-  }, [usager, isEdit, form])
+  }, [usager, isEdit, form, ocrApplied])
+
+  useEffect(() => {
+    if (ocrApplied || !ocrSuggestions.data || ocrSuggestions.data.confidence <= 0) {
+      return
+    }
+    if (isEdit && !usager) {
+      return
+    }
+    const s = ocrSuggestions.data
+    const typeDocument =
+      s.typeDocument === 'PASSEPORT' ||
+      s.typeDocument === 'CNI' ||
+      s.typeDocument === 'TITRE_SEJOUR' ||
+      s.typeDocument === 'AUTRE'
+        ? s.typeDocument
+        : undefined
+
+    form.reset({
+      ...form.getValues(),
+      nom: s.nom ?? form.getValues('nom'),
+      prenom: s.prenom ?? form.getValues('prenom'),
+      dateNaissance: s.dateNaissance ?? form.getValues('dateNaissance'),
+      lieuNaissance: s.lieuNaissance ?? form.getValues('lieuNaissance'),
+      nationalite: s.nationalite ?? form.getValues('nationalite'),
+      numeroDocument: s.numeroDocument ?? form.getValues('numeroDocument'),
+      typeDocument: typeDocument ?? form.getValues('typeDocument'),
+    })
+    setOcrApplied(true)
+  }, [ocrSuggestions.data, ocrApplied, form, isEdit, usager])
 
   const onSubmit = (values: UsagerFormValues) => {
     const payload = {
@@ -134,6 +168,12 @@ export function UsagerFormPage() {
       <h1 className="text-2xl font-semibold text-primary">
         {isEdit ? t('form.editTitle') : t('form.createTitle')}
       </h1>
+      {ocrDocId && ocrSuggestions.isLoading && (
+        <p className="text-muted-foreground text-sm">{t('form.ocrLoading')}</p>
+      )}
+      {ocrApplied && (
+        <p className="text-success text-sm">{t('form.ocrApplied')}</p>
+      )}
 
       {!ignoreDoublons && !isEdit && (
         <DoublonAlert

@@ -62,9 +62,13 @@
   "viewer": {
     "fullscreen": "Fullscreen",
     "error": "Unable to load document",
+    "fileMissing": "File missing from storage. Please re-upload the document.",
     "noPreview": "Preview not available for this file type",
     "ocr": "OCR text",
     "ocrEmpty": "No OCR result (module disabled or pending)",
-    "ocrFailed": "OCR failed"
+    "ocrFailed": "OCR failed",
+    "ocrPrefillCreate": "Pre-fill new user",
+    "ocrPrefillEdit": "Pre-fill user form",
+    "ocrConfidence": "Suggestion confidence: {{value}}%"
   }
 }

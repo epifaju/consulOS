@@ -1,0 +1,68 @@
+{
+  "title": "Tableau de bord régional",
+  "subtitle": "Pilotage multi-postes du réseau consulaire",
+  "loading": "Chargement…",
+  "forbidden": "Accès réservé aux profils réseau / supervision",
+  "disabled": "Module réseau désactivé (CONSULOS_RESEAU_ENABLED)",
+  "emptyMembership": "Aucun réseau rattaché à votre compte",
+  "kpis": {
+    "postes": "Postes",
+    "dossiersOuverts": "Dossiers ouverts",
+    "enRevue": "En revue",
+    "rdvJour": "RDV du jour",
+    "recettesJour": "Recettes du jour",
+    "enRetard": "Dossiers en retard",
+    "recettesPeriode": "Recettes période"
+  },
+  "postes": {
+    "title": "Postes du réseau",
+    "empty": "Aucun poste dans ce réseau",
+    "code": "Code",
+    "nom": "Poste",
+    "dossiers": "Dossiers",
+    "enRevue": "En revue",
+    "rdv": "RDV",
+    "recettes": "Recettes"
+  },
+  "detail": {
+    "title": "Détail du poste",
+    "notFound": "Poste introuvable ou hors périmètre"
+  },
+  "reporting": {
+    "title": "Reporting multi-sites",
+    "subtitle": "Synthèse mensuelle agrégée sur le réseau",
+    "year": "Année",
+    "month": "Mois",
+    "refresh": "Actualiser",
+    "excel": "Export Excel",
+    "empty": "Aucune donnée pour cette période",
+    "dossiers": "Dossiers créés",
+    "documents": "Documents",
+    "rdv": "RDV",
+    "montant": "Montant perçu"
+  },
+  "alerts": {
+    "title": "Alertes réseau",
+    "empty": "Aucune alerte active",
+    "count": "{{count}} élément(s)",
+    "postes": "Postes concernés",
+    "types": {
+      "DOSSIERS_BLOQUES": "Dossiers bloqués",
+      "ECHEANCES_DEPASSEES": "Échéances dépassées",
+      "AGENTS_SURCHARGES": "Agents surchargés",
+      "CAISSE_SILENCIEUSE": "Caisse silencieuse"
+    }
+  },
+  "admin": {
+    "postesTitle": "Gestion des postes",
+    "membresTitle": "Membres du réseau",
+    "orgCode": "Code organisation",
+    "attach": "Rattacher",
+    "attachError": "Impossible de rattacher ce poste",
+    "readOnly": "Lecture seule — rôle ADMIN réseau requis pour modifier",
+    "membre": "Membre",
+    "email": "E-mail",
+    "role": "Rôle",
+    "noMembres": "Aucun membre"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Painel regional",
+  "subtitle": "Supervisão multi-postos da rede consular",
+  "loading": "A carregar…",
+  "forbidden": "Acesso reservado a perfis de rede / supervisão",
+  "disabled": "Módulo de rede desativado (CONSULOS_RESEAU_ENABLED)",
+  "emptyMembership": "Nenhuma rede associada à sua conta",
+  "kpis": {
+    "postes": "Postos",
+    "dossiersOuverts": "Processos abertos",
+    "enRevue": "Em revisão",
+    "rdvJour": "Marcações do dia",
+    "recettesJour": "Receitas do dia",
+    "enRetard": "Processos em atraso",
+    "recettesPeriode": "Receitas do período"
+  },
+  "postes": {
+    "title": "Postos da rede",
+    "empty": "Nenhum posto nesta rede",
+    "code": "Código",
+    "nom": "Posto",
+    "dossiers": "Processos",
+    "enRevue": "Revisão",
+    "rdv": "Marc.",
+    "recettes": "Receitas"
+  },
+  "detail": {
+    "title": "Detalhe do posto",
+    "notFound": "Posto não encontrado ou fora do perímetro"
+  },
+  "reporting": {
+    "title": "Relatórios multi-postos",
+    "subtitle": "Síntese mensal agregada da rede",
+    "year": "Ano",
+    "month": "Mês",
+    "refresh": "Atualizar",
+    "excel": "Exportar Excel",
+    "empty": "Sem dados para este período",
+    "dossiers": "Processos criados",
+    "documents": "Documentos",
+    "rdv": "Marcações",
+    "montant": "Montante recebido"
+  },
+  "alerts": {
+    "title": "Alertas da rede",
+    "empty": "Nenhum alerta ativo",
+    "count": "{{count}} item(ns)",
+    "postes": "Postos afetados",
+    "types": {
+      "DOSSIERS_BLOQUES": "Processos bloqueados",
+      "ECHEANCES_DEPASSEES": "Prazos ultrapassados",
+      "AGENTS_SURCHARGES": "Agentes sobrecarregados",
+      "CAISSE_SILENCIEUSE": "Caixa silenciosa"
+    }
+  },
+  "admin": {
+    "postesTitle": "Gestão de postos",
+    "membresTitle": "Membros da rede",
+    "orgCode": "Código da organização",
+    "attach": "Associar",
+    "attachError": "Não foi possível associar este posto",
+    "readOnly": "Somente leitura — função ADMIN da rede necessária para editar",
+    "membre": "Membro",
+    "email": "E-mail",
+    "role": "Função",
+    "noMembres": "Nenhum membro"
+  }
+}

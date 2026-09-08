@@ -56,6 +56,9 @@ docker-compose.override.yml
 docker-compose.local.yml
 docker-compose.*.local.yml
 
+# --- Modèles Tesseract (téléchargés via scripts/download-tessdata.ps1) ---
+tessdata/*.traineddata
+
 # --- Sauvegardes & dumps BDD ---
 *.sql.gz
 *.sql.dump

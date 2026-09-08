@@ -11,6 +11,7 @@ import frDashboard from '@/locales/fr/dashboard.json'
 import frAdmin from '@/locales/fr/admin.json'
 import frPortal from '@/locales/fr/portal.json'
 import frReporting from '@/locales/fr/reporting.json'
+import frRegional from '@/locales/fr/regional.json'
 import enCommon from '@/locales/en/common.json'
 import enAuth from '@/locales/en/auth.json'
 import enUsagers from '@/locales/en/usagers.json'
@@ -22,6 +23,7 @@ import enDashboard from '@/locales/en/dashboard.json'
 import enAdmin from '@/locales/en/admin.json'
 import enPortal from '@/locales/en/portal.json'
 import enReporting from '@/locales/en/reporting.json'
+import enRegional from '@/locales/en/regional.json'
 import ptCommon from '@/locales/pt/common.json'
 import ptAuth from '@/locales/pt/auth.json'
 import ptUsagers from '@/locales/pt/usagers.json'
@@ -33,6 +35,7 @@ import ptDashboard from '@/locales/pt/dashboard.json'
 import ptAdmin from '@/locales/pt/admin.json'
 import ptPortal from '@/locales/pt/portal.json'
 import ptReporting from '@/locales/pt/reporting.json'
+import ptRegional from '@/locales/pt/regional.json'
 
 const namespaces = [
   'common',
@@ -46,6 +49,7 @@ const namespaces = [
   'admin',
   'portal',
   'reporting',
+  'regional',
 ] as const
 
 void i18n.use(initReactI18next).init({
@@ -69,6 +73,7 @@ void i18n.use(initReactI18next).init({
       admin: frAdmin,
       portal: frPortal,
       reporting: frReporting,
+      regional: frRegional,
     },
     en: {
       common: enCommon,
@@ -82,6 +87,7 @@ void i18n.use(initReactI18next).init({
       admin: enAdmin,
       portal: enPortal,
       reporting: enReporting,
+      regional: enRegional,
     },
     pt: {
       common: ptCommon,
@@ -95,6 +101,7 @@ void i18n.use(initReactI18next).init({
       admin: ptAdmin,
       portal: ptPortal,
       reporting: ptReporting,
+      regional: ptRegional,
     },
   },
 })

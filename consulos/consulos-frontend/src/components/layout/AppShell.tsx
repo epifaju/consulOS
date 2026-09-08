@@ -8,6 +8,7 @@ import {
   FolderOpen,
   LayoutDashboard,
   Menu,
+  Network,
   Settings,
   Users,
   Wallet,
@@ -36,6 +37,7 @@ const navItems: { to: NavPath; labelKey: string; icon: typeof LayoutDashboard }[
   { to: '/documents', labelKey: 'nav.documents', icon: FileText },
   { to: '/caisse', labelKey: 'nav.caisse', icon: Wallet },
   { to: '/reporting', labelKey: 'nav.reporting', icon: BarChart3 },
+  { to: '/regional', labelKey: 'nav.regional', icon: Network },
   { to: '/administration', labelKey: 'nav.administration', icon: Settings },
 ]
 

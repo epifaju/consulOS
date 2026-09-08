@@ -1,0 +1,68 @@
+{
+  "title": "Regional dashboard",
+  "subtitle": "Multi-post consular network oversight",
+  "loading": "Loading…",
+  "forbidden": "Access restricted to network / supervision profiles",
+  "disabled": "Network module disabled (CONSULOS_RESEAU_ENABLED)",
+  "emptyMembership": "No network linked to your account",
+  "kpis": {
+    "postes": "Posts",
+    "dossiersOuverts": "Open cases",
+    "enRevue": "Under review",
+    "rdvJour": "Today's appointments",
+    "recettesJour": "Today's receipts",
+    "enRetard": "Overdue cases",
+    "recettesPeriode": "Period receipts"
+  },
+  "postes": {
+    "title": "Network posts",
+    "empty": "No posts in this network",
+    "code": "Code",
+    "nom": "Post",
+    "dossiers": "Cases",
+    "enRevue": "Review",
+    "rdv": "Appts",
+    "recettes": "Receipts"
+  },
+  "detail": {
+    "title": "Post detail",
+    "notFound": "Post not found or out of scope"
+  },
+  "reporting": {
+    "title": "Multi-site reporting",
+    "subtitle": "Aggregated monthly network summary",
+    "year": "Year",
+    "month": "Month",
+    "refresh": "Refresh",
+    "excel": "Excel export",
+    "empty": "No data for this period",
+    "dossiers": "Cases created",
+    "documents": "Documents",
+    "rdv": "Appointments",
+    "montant": "Amount received"
+  },
+  "alerts": {
+    "title": "Network alerts",
+    "empty": "No active alerts",
+    "count": "{{count}} item(s)",
+    "postes": "Affected posts",
+    "types": {
+      "DOSSIERS_BLOQUES": "Blocked cases",
+      "ECHEANCES_DEPASSEES": "Overdue deadlines",
+      "AGENTS_SURCHARGES": "Overloaded agents",
+      "CAISSE_SILENCIEUSE": "Silent cashier"
+    }
+  },
+  "admin": {
+    "postesTitle": "Post management",
+    "membresTitle": "Network members",
+    "orgCode": "Organisation code",
+    "attach": "Attach",
+    "attachError": "Unable to attach this post",
+    "readOnly": "Read-only — ADMIN network role required to edit",
+    "membre": "Member",
+    "email": "Email",
+    "role": "Role",
+    "noMembres": "No members"
+  }
+}

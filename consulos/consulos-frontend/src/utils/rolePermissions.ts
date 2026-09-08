@@ -30,6 +30,7 @@ export function canAssignDossierAgent(role: string | undefined): boolean {
 
 const DASHBOARD_SUPERVISION_ROLES = ['ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
 const DASHBOARD_RECETTES_ROLES = ['ROLE_CAISSIER', 'ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
+const RESEAU_ROLES = ['ROLE_ADMIN_RESEAU', 'ROLE_ADMIN', 'ROLE_SUPERVISEUR'] as const
 
 export function canViewDashboardSupervision(role: string | undefined): boolean {
   return role != null && (DASHBOARD_SUPERVISION_ROLES as readonly string[]).includes(role)
@@ -37,6 +38,10 @@ export function canViewDashboardSupervision(role: string | undefined): boolean {
 
 export function canViewDashboardRecettes(role: string | undefined): boolean {
   return role != null && (DASHBOARD_RECETTES_ROLES as readonly string[]).includes(role)
+}
+
+export function canAccessReseau(role: string | undefined): boolean {
+  return role != null && (RESEAU_ROLES as readonly string[]).includes(role)
 }
 
 export type NavPath =
@@ -47,17 +52,19 @@ export type NavPath =
   | '/documents'
   | '/caisse'
   | '/reporting'
+  | '/regional'
   | '/administration'
 
 /** Rôles autorisés à voir chaque entrée du menu (aligné sur les APIs de lecture). */
 const NAV_ROLES: Record<NavPath, readonly string[]> = {
-  '/': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL'],
+  '/': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL', 'ROLE_ADMIN_RESEAU'],
   '/usagers': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL'],
   '/dossiers': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL'],
   '/rendezvous': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_ACCUEIL'],
   '/documents': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER'],
   '/caisse': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_CAISSIER'],
   '/reporting': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR'],
+  '/regional': ['ROLE_ADMIN_RESEAU', 'ROLE_ADMIN', 'ROLE_SUPERVISEUR'],
   '/administration': ['ROLE_ADMIN'],
 }
 
@@ -69,4 +76,4 @@ export function canAccessNav(path: NavPath, role: string | undefined): boolean {
 export function canAccessAdministration(role: string | undefined): boolean {
   return canAccessNav('/administration', role)
 }
-
+

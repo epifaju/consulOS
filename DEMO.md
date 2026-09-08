@@ -78,7 +78,7 @@ Vérifications :
 
 | MinIO console | http://localhost:9001 (`minioadmin` / `minioadmin123`) |
 
-| MailHog | http://localhost:8025 |
+| MailHog (ConsulOS) | http://localhost:8026 (SMTP `localhost:1026`) |
 
 
 
@@ -105,6 +105,8 @@ Mot de passe pour tous : **`Admin1234!`**
 | AGENT | agent@consulos.local | Dashboard (accueil) | Pas Caisse / Admin | Usagers, dossiers, documents, RDV |
 
 | CAISSIER | caissier@consulos.local | **Caisse** | Pas RDV / Admin | Encaissements, reçus PDF, export Excel |
+
+| ADMIN_RESEAU | reseau@consulos.local | **Réseau** (`/regional`) | Accueil + Réseau | TDB régional multi-postes (GNB-FR + SEN-FR) |
 
 
 
@@ -138,7 +140,8 @@ Mot de passe pour tous : **`Admin1234!`**
 
 RDV planifié pour Mamadou Camara (lendemain 10h00).
 
-> **Portail usager** : http://localhost:3000/portal — ex. `DOS-2026-00001` + `mamadou.camara@email.com` → lien dans MailHog (`http://localhost:8025`).
+> **Portail usager** : http://localhost:3010/portal — ex. `DOS-2026-00001` + email usager de la fiche.  
+> Les mails **ne partent pas** vers Gmail/Yahoo en local : ouvrir **MailHog ConsulOS** → http://localhost:8026 (SMTP `MAIL_PORT=1026`, pas le Mailpit eConsulat sur 8025).
 
 
 
@@ -346,9 +349,11 @@ Toujours en **agent** :
 
 - **SMS RDV (Phase 2, optionnel)** : `CONSULOS_SMS_ENABLED=true` — confirmation / annulation / rappel en complément email (provider `log` ou `twilio`)
 
-- **Paiement en ligne (Phase 3, optionnel)** : `CONSULOS_PAYMENT_ENABLED=true` — bouton « Payer en ligne » en caisse (simulateur `log` ou stub Stripe). Flux démo : Caisse → Payer → « Payer en ligne » → page `/caisse/paiement-en-ligne?session=pay_…` → « Simuler paiement réussi » (mode `EXTERNE`).
+- **Paiement en ligne (Phase 3)** : `CONSULOS_PAYMENT_ENABLED=true` — simulateur `log` ou **Stripe Checkout** (`CONSULOS_PAYMENT_PROVIDER=stripe-sdk` + `STRIPE_SECRET_KEY` / webhook `POST /payments/webhook/stripe`).
 
-- **OCR (Phase 3, optionnel)** : `CONSULOS_OCR_ENABLED=true` — après upload document, texte stub visible dans le viewer (bloc OCR). Provider `log` par défaut ; Tesseract prévu plus tard.
+- **OCR (Phase 3)** : `CONSULOS_OCR_ENABLED=true` — providers `log` | `structured-log` | **`tesseract`** (Tess4J). Modèles : `.\scripts\download-tessdata.ps1` puis `CONSULOS_OCR_TESSERACT_DATAPATH=…/tessdata`. Viewer → **Pré-remplir usager**.
+
+- **Réseau multi-postes (Phase 3 Vague A–D)** : `CONSULOS_RESEAU_ENABLED=true` — login `reseau@consulos.local` / `Admin1234!` → menu **Réseau** (`/regional`) : KPIs, alertes, reporting Excel, **rattacher/détacher postes** (code org) + liste membres. APIs `/reseau/*`, `/regional/*`.
 
 - **Tests** : 19 scénarios Playwright (auth, dossier, documents, caisse, exports, perf < 2 s)
 

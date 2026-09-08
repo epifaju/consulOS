@@ -23,6 +23,13 @@ export const documentService = {
   getDownloadUrl: (id: string) =>
     apiClient.get<ApiResponse<DownloadUrl>>(`/documents/${id}/download-url`),
 
+  /** Contenu binaire via l'API (évite le XML MinIO en cas de fichier absent). */
+  getContent: (id: string, disposition: 'inline' | 'attachment' = 'inline') =>
+    apiClient.get<Blob>(`/documents/${id}/content`, {
+      params: { disposition },
+      responseType: 'blob',
+    }),
+
   upload: ({ file, dossierId, usagerId, typeDocument, notes, onProgress }: DocumentUploadParams) => {
     const formData = new FormData()
     formData.append('file', file)

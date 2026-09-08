@@ -22,6 +22,7 @@ const DocumentsPage = lazy(() => import('@/pages/DocumentsPage'))
 const CaissePage = lazy(() => import('@/pages/encaissement/CaissePage'))
 const PaiementEnLignePage = lazy(() => import('@/pages/encaissement/PaiementEnLignePage'))
 const ReportingPage = lazy(() => import('@/pages/reporting/ReportingPage'))
+const RegionalDashboardPage = lazy(() => import('@/pages/regional/RegionalDashboardPage'))
 const RecuPage = lazy(() => import('@/pages/encaissement/RecuPage'))
 const AdminLayout = lazy(() => import('@/pages/administration/AdminLayout'))
 const UsersPage = lazy(() => import('@/pages/administration/UsersPage'))
@@ -67,6 +68,13 @@ export function AppRouter() {
               <Route path="caisse/paiement-en-ligne" element={<PaiementEnLignePage />} />
               <Route path="caisse/recu/:id" element={<RecuPage />} />
               <Route path="reporting" element={<ReportingPage />} />
+              <Route
+                element={
+                  <ProtectedRoute roles={['ROLE_ADMIN_RESEAU', 'ROLE_ADMIN', 'ROLE_SUPERVISEUR']} />
+                }
+              >
+                <Route path="regional" element={<RegionalDashboardPage />} />
+              </Route>
               <Route element={<ProtectedRoute roles={['ROLE_ADMIN']} />}>
                 <Route path="administration" element={<AdminLayout />}>
                   <Route index element={<Navigate to="users" replace />} />

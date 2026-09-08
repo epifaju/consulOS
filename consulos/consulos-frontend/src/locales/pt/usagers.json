@@ -91,6 +91,8 @@
       "identity": "Identidade",
       "contact": "Contacto",
       "document": "Documento"
-    }
+    },
+    "ocrLoading": "A carregar sugestões OCR…",
+    "ocrApplied": "Campos pré-preenchidos a partir do OCR"
   }
 }
