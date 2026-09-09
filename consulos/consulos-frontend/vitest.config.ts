@@ -9,6 +9,18 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     globals: true,
     exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.test.{ts,tsx}',
+        'src/test/**',
+        'src/main.tsx',
+        'src/vite-env.d.ts',
+        'src/components/ui/**',
+      ],
+    },
   },
   resolve: {
     alias: {

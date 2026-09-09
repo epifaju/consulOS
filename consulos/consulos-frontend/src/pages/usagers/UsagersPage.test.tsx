@@ -37,6 +37,11 @@ vi.mock('@/hooks/useUsagers', () => ({
   useDeleteUsager: () => ({ mutate: vi.fn(), isPending: false }),
 }))
 
+vi.mock('@/stores/authStore', () => ({
+  useAuthStore: (selector: (state: { user: { role: string } }) => unknown) =>
+    selector({ user: { role: 'ROLE_AGENT' } }),
+}))
+
 function renderPage(initialPath = '/usagers') {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
