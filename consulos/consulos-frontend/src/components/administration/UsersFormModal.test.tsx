@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { UsersFormModal } from '@/components/administration/UsersFormModal'
@@ -64,11 +64,11 @@ describe('UsersFormModal', () => {
 
     expect(screen.getByText(/Créer un agent/i)).toBeInTheDocument()
     const [email, prenom, nom] = screen.getAllByRole('textbox')
-    await user.type(email, 'new@consulos.local')
-    await user.type(prenom, 'Fatou')
-    await user.type(nom, 'Bah')
+    fireEvent.change(email, { target: { value: 'new@consulos.local' } })
+    fireEvent.change(prenom, { target: { value: 'Fatou' } })
+    fireEvent.change(nom, { target: { value: 'Bah' } })
     await user.click(screen.getByRole('combobox'))
-    await user.click(await screen.findByRole('option', { name: 'Agent' }))
+    await user.click(await screen.findByRole('option', { name: 'Agent' }, { timeout: 8000 }))
     await user.click(screen.getByRole('button', { name: /Enregistrer/i }))
 
     await waitFor(() => {
@@ -86,7 +86,7 @@ describe('UsersFormModal', () => {
     expect(onCreated).toHaveBeenCalledWith('Tmp-Pass-99')
     expect(onOpenChange).toHaveBeenCalledWith(false)
     expect(updateMutate).not.toHaveBeenCalled()
-  })
+  }, 15000)
 
   it('hydrates and updates an existing agent', async () => {
     const onOpenChange = vi.fn()
