@@ -91,26 +91,34 @@ export function UsersFormModal({ open, onOpenChange, user, onCreated }: UsersFor
         </DialogHeader>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium">{t('users.fields.email')}</label>
-            <Input {...form.register('email')} type="email" />
+            <label htmlFor="user-email" className="mb-1 block text-sm font-medium">
+              {t('users.fields.email')}
+            </label>
+            <Input id="user-email" {...form.register('email')} type="email" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('users.fields.prenom')}</label>
-              <Input {...form.register('prenom')} />
+              <label htmlFor="user-prenom" className="mb-1 block text-sm font-medium">
+                {t('users.fields.prenom')}
+              </label>
+              <Input id="user-prenom" {...form.register('prenom')} />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('users.fields.nom')}</label>
-              <Input {...form.register('nom')} />
+              <label htmlFor="user-nom" className="mb-1 block text-sm font-medium">
+                {t('users.fields.nom')}
+              </label>
+              <Input id="user-nom" {...form.register('nom')} />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">{t('users.fields.role')}</label>
+            <label htmlFor="user-role" className="mb-1 block text-sm font-medium">
+              {t('users.fields.role')}
+            </label>
             <Select
               value={form.watch('roleId')}
               onValueChange={(v) => form.setValue('roleId', v)}
             >
-              <SelectTrigger>
+              <SelectTrigger id="user-role">
                 <SelectValue placeholder={t('users.fields.role')} />
               </SelectTrigger>
               <SelectContent>
@@ -122,8 +130,9 @@ export function UsersFormModal({ open, onOpenChange, user, onCreated }: UsersFor
               </SelectContent>
             </Select>
           </div>
-          <label className="flex items-center gap-2 text-sm">
+          <label htmlFor="user-actif" className="flex items-center gap-2 text-sm">
             <input
+              id="user-actif"
               type="checkbox"
               checked={form.watch('actif')}
               onChange={(e) => form.setValue('actif', e.target.checked)}

@@ -90,8 +90,11 @@ export function RdvCreateModal({ open, onOpenChange, initialDate, initialTime }:
         {step === 1 && (
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('create.date')}</label>
+              <label htmlFor="rdv-date" className="mb-1 block text-sm font-medium">
+                {t('create.date')}
+              </label>
               <Input
+                id="rdv-date"
                 type="date"
                 value={selectedDate}
                 onChange={(e) => {
@@ -101,9 +104,11 @@ export function RdvCreateModal({ open, onOpenChange, initialDate, initialTime }:
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium">{t('create.typeService')}</label>
+              <label htmlFor="rdv-type-service" className="mb-1 block text-sm font-medium">
+                {t('create.typeService')}
+              </label>
               <Select value={typeServiceId || 'NONE'} onValueChange={(v) => setTypeServiceId(v === 'NONE' ? '' : v)}>
-                <SelectTrigger>
+                <SelectTrigger id="rdv-type-service">
                   <SelectValue placeholder={t('create.selectType')} />
                 </SelectTrigger>
                 <SelectContent>
@@ -154,7 +159,11 @@ export function RdvCreateModal({ open, onOpenChange, initialDate, initialTime }:
 
         {step === 2 && (
           <div className="space-y-4">
+            <label htmlFor="rdv-usager-search" className="sr-only">
+              {t('create.usagerSearch')}
+            </label>
             <Input
+              id="rdv-usager-search"
               placeholder={t('create.usagerSearch')}
               value={usagerSearch}
               onChange={(e) => setUsagerSearch(e.target.value)}
@@ -205,7 +214,11 @@ export function RdvCreateModal({ open, onOpenChange, initialDate, initialTime }:
                 <strong>{t('create.recapUsager')}:</strong> {selectedUsager.prenom} {selectedUsager.nom}
               </p>
             </div>
+            <label htmlFor="rdv-notes" className="mb-1 block text-sm font-medium">
+              {t('create.notes')}
+            </label>
             <textarea
+              id="rdv-notes"
               className="min-h-[60px] w-full rounded-md border px-3 py-2 text-sm"
               placeholder={t('create.notes')}
               value={notes}

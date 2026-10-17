@@ -52,6 +52,16 @@ export function useUpdateDocumentStatut(dossierId?: string) {
   })
 }
 
+export function useReplaceDocumentFile(dossierId?: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, file }: { id: string; file: File }) => documentService.replaceFile(id, file),
+    onSuccess: () => {
+      invalidateDocumentQueries(queryClient, dossierId)
+    },
+  })
+}
+
 export function useDeleteDocument(dossierId?: string) {
   const queryClient = useQueryClient()
   return useMutation({

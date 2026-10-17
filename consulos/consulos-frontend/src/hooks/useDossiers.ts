@@ -81,6 +81,29 @@ export function useAddDossierCommentaire(id: string) {
   })
 }
 
+export function useDossierChecklist(dossierId: string | undefined) {
+  return useQuery({
+    queryKey: ['dossier-checklist', dossierId],
+    queryFn: async () => {
+      const response = await dossierService.getChecklist(dossierId as string)
+      return response.data.data
+    },
+    enabled: Boolean(dossierId),
+    retry: 1,
+  })
+}
+
+export function useUpdateChecklistItem(dossierId: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ code, valide }: { code: string; valide: boolean }) =>
+      dossierService.updateChecklistItem(dossierId, code, valide),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['dossier-checklist', dossierId] })
+    },
+  })
+}
+
 export function useAssignableAgents() {
   return useQuery({
     queryKey: ['dossier-assign-agents'],

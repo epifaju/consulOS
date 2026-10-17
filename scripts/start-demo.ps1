@@ -27,7 +27,7 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", $frontendCmd | Out
 
 Write-Host ""
 Write-Host "Démo ConsulOS démarrée." -ForegroundColor Green
-Write-Host "  Frontend : http://localhost:3000 (ou port alternatif affiché par Vite)"
+Write-Host "  Frontend : http://localhost:3010  (pas 3000/3001 : Grafana)"
 Write-Host "  API      : http://localhost:8082/api/v1"
 Write-Host ""
 Write-Host "Comptes (mot de passe Admin1234!) :" -ForegroundColor Yellow

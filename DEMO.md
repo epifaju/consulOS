@@ -48,9 +48,13 @@ Vérifications :
 
 |-------|----------------|---------|
 
-| API | http://localhost:8082/api/v1/actuator/health | `UP` (ou 503 si Redis down — API utilisable) |
+| API | http://localhost:8082/api/v1/actuator/health | `UP` si Postgres + Redis OK |
 
-| Frontend | http://localhost:3000 | Page login ConsulOS |
+| Liveness | http://localhost:8082/api/v1/actuator/health/liveness | `UP` même si Redis est down |
+
+| Readiness | http://localhost:8082/api/v1/actuator/health/readiness | `DOWN` si Redis ou Postgres indisponible |
+
+| Frontend | http://localhost:3010 | Page login ConsulOS (3000/3001 = Grafana) |
 
 | Swagger | http://localhost:8082/swagger-ui/index.html | Groupes 01-auth … 11-reporting |
 
@@ -70,7 +74,7 @@ Vérifications :
 
 |---------|-----|
 
-| Frontend | http://localhost:3000 (ou port Vite affiché) |
+| Frontend | http://localhost:3010 (Grafana occupe souvent 3000/3001) |
 
 | API | http://localhost:8082/api/v1 |
 
@@ -79,6 +83,11 @@ Vérifications :
 | MinIO console | http://localhost:9001 (`minioadmin` / `minioadmin123`) |
 
 | MailHog (ConsulOS) | http://localhost:8026 (SMTP `localhost:1026`) |
+
+| Réconciliation docs | `.\scripts\check-document-storage.ps1` | Compare Postgres vs MinIO (`consulos-docs`) |
+
+| Sauvegarde MinIO | `.\scripts\backup-minio.ps1` | Copie `consulos-docs` vers `backups/minio/<timestamp>/` (aussi au démarrage infra) |
+| Sauvegarde complète | `.\scripts\backup-all.ps1` | Postgres (`pg_dump`) + MinIO ; restore : `.\scripts\verify-backup-restore.ps1` |
 
 
 
@@ -394,6 +403,37 @@ Toujours en **agent** :
 ---
 
 
+
+## Vague 4 — pilote production (après un client pilote)
+
+Ne pas coller `Admin1234!` / `minioadmin` dans `.env.prod`. TLS sur nginx, MinIO en tag figé, Grafana sur **:3011**.
+
+```powershell
+copy .env.prod.example .env.prod
+# remplir POSTGRES_PASSWORD, REDIS_PASSWORD, MINIO_*, GRAFANA_ADMIN_PASSWORD (uniques)
+
+.\scripts\generate-jwt-keys.ps1
+.\scripts\generate-pilot-tls.ps1
+.\scripts\check-prod-secrets.ps1
+
+docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
+# observabilité (Prometheus :9090, Grafana :3011)
+docker compose --env-file .env.prod -f docker-compose.prod.yml -f docker-compose.observability.yml up -d
+
+.\scripts\backup-all.ps1 -ComposeFile docker-compose.prod.yml -Database consulos
+.\scripts\verify-backup-restore.ps1
+```
+
+| Contrôle | Détail |
+|----------|--------|
+| Secrets | `ProdSecretsStartupGuard` refuse les mots de passe démo au démarrage `prod` ; JWT via Docker secrets |
+| TLS | `nginx/certs/{fullchain,privkey}.pem` ; HSTS ; cookies refresh `Secure` + `SameSite=Strict` |
+| MinIO | `minio/minio:RELEASE.2024-01-16T16-07-38Z` (plus de `:latest`) |
+| Backups | `backup-all.ps1` (pg_dump + volume MinIO) ; `verify-backup-restore.ps1` |
+| Observabilité | scrape `/api/v1/actuator/prometheus` **interne** ; nginx refuse l’accès public |
+| Restant hors pilote | CSRF SPA toujours off ; mots de passe seed Flyway à rotator après 1er login ; PKI réelle (pas auto-signé) |
+
+---
 
 ## Tests automatisés
 

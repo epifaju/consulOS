@@ -30,6 +30,18 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
+function isLoginServiceUnavailable(error: AxiosError<ApiResponse<null>>): boolean {
+  const status = error.response?.status
+  if (status === 502 || status === 503 || status === 504) {
+    return true
+  }
+  if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT' || error.code === 'ERR_NETWORK') {
+    return true
+  }
+  const errorCode = error.response?.data?.errorCode ?? ''
+  return errorCode.includes('REDIS')
+}
+
 function resolveRedirectPath(role: string, returnUrl: string | null): string {
   if (returnUrl && returnUrl.startsWith('/') && !returnUrl.startsWith('/login')) {
     return returnUrl
@@ -83,6 +95,8 @@ export function LoginPage() {
         setApiError(t('errors.rateLimit'))
       } else if (error.response?.status === 401) {
         setApiError(t('errors.invalidCredentials'))
+      } else if (isLoginServiceUnavailable(error)) {
+        setApiError(t('errors.unavailable'))
       } else {
         setApiError(t('errors.generic'))
       }

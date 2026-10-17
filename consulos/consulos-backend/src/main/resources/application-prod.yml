@@ -26,6 +26,12 @@ management:
       prometheus:
         enabled: true
 
+server:
+  ssl:
+    enabled: ${SSL_ENABLED:false}
+
 consulos:
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:https://consulos.local}
+  observability:
+    prometheus-anonymous: ${CONSULOS_PROMETHEUS_ANONYMOUS:false}

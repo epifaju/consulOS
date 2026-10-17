@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { CaissePage } from '@/pages/encaissement/CaissePage'
@@ -64,6 +63,10 @@ vi.mock('@/hooks/useEncaissements', () => ({
 
 vi.mock('@/hooks/useEncaissementExports', () => ({
   useExportJournalExcel: () => ({ mutate: vi.fn(), isPending: false }),
+}))
+
+vi.mock('@/components/encaissement/JournalCaissePanel', () => ({
+  JournalCaissePanel: () => <div>Journal de caisse</div>,
 }))
 
 vi.mock('@/hooks/usePayments', () => ({
@@ -131,9 +134,8 @@ describe('CaissePage', () => {
   })
 
   it('opens paiement dialog for DU encaissement', async () => {
-    const user = userEvent.setup()
     renderPage()
-    await user.click(screen.getByTitle(/Enregistrer paiement/i))
-    expect(await screen.findByText(/Enregistrer un paiement/i)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Enregistrer paiement/i }))
+    expect(await screen.findByRole('heading', { name: /Enregistrer un paiement/i })).toBeInTheDocument()
   })
 })

@@ -12,6 +12,7 @@ export type DossierPriorite = 'URGENTE' | 'NORMALE' | 'FAIBLE'
 export interface ChecklistItem {
   code: string
   libelle: string
+  valide?: boolean
 }
 
 export interface DossierSummary {

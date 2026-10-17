@@ -150,4 +150,34 @@ describe('LoginPage', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent(/Email ou mot de passe incorrect/i)
   })
+
+  it('shows service unavailable on 502', async () => {
+    const error = new AxiosError<ApiResponse<null>>('Bad Gateway')
+    error.response = {
+      status: 502,
+      data: {
+        success: false,
+        data: null,
+        message: null,
+        errorCode: null,
+        timestamp: '2026-10-17T10:00:00Z',
+      },
+      statusText: 'Bad Gateway',
+      headers: {},
+      config: { headers: {} } as never,
+    }
+    vi.mocked(authService.login).mockRejectedValue(error)
+    renderLogin()
+    await fillAndSubmit('agent@consulos.local', 'Password1')
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Service indisponible/i)
+  })
+
+  it('shows service unavailable on timeout', async () => {
+    const error = new AxiosError<ApiResponse<null>>('timeout')
+    error.code = 'ECONNABORTED'
+    vi.mocked(authService.login).mockRejectedValue(error)
+    renderLogin()
+    await fillAndSubmit('agent@consulos.local', 'Password1')
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Service indisponible/i)
+  })
 })

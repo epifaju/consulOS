@@ -63,6 +63,8 @@
     "fullscreen": "Plein écran",
     "error": "Impossible de charger le document",
     "fileMissing": "Fichier absent du stockage. Ré-uploadez le document.",
+    "reupload": "Ré-uploader le fichier",
+    "reuploadSuccess": "Fichier remplacé. L'aperçu a été actualisé.",
     "noPreview": "Aperçu non disponible pour ce type de fichier",
     "ocr": "Texte OCR",
     "ocrEmpty": "Aucun résultat OCR (module désactivé ou en cours)",

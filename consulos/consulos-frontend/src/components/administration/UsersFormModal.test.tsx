@@ -63,6 +63,7 @@ describe('UsersFormModal', () => {
     )
 
     expect(screen.getByText(/Créer un agent/i)).toBeInTheDocument()
+    expect(screen.getByLabelText('Email')).toHaveAttribute('id', 'user-email')
     const [email, prenom, nom] = screen.getAllByRole('textbox')
     fireEvent.change(email, { target: { value: 'new@consulos.local' } })
     fireEvent.change(prenom, { target: { value: 'Fatou' } })

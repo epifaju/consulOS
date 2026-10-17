@@ -1,3 +1,14 @@
+# Stack pilote / production. Secrets obligatoires via .env.prod (voir .env.prod.example).
+# TLS terminé sur nginx. Backend HTTP interne (SSL_ENABLED=false).
+#
+#   copy .env.prod.example .env.prod
+#   .\scripts\check-prod-secrets.ps1
+#   .\scripts\generate-jwt-keys.ps1
+#   .\scripts\generate-pilot-tls.ps1
+#   docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
+
+name: consulos_prod
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -12,6 +23,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - consulos
+    restart: unless-stopped
 
   redis:
     image: redis:7-alpine
@@ -21,51 +35,68 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    networks:
+      - consulos
+    restart: unless-stopped
 
   minio:
-    image: minio/minio:latest
+    image: minio/minio:RELEASE.2024-01-16T16-07-38Z
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:?MINIO_ACCESS_KEY required}
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:?MINIO_SECRET_KEY required}
     volumes:
       - minio_data:/data
+    networks:
+      - consulos
+    restart: unless-stopped
 
   backend:
     build:
       context: ./consulos/consulos-backend
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SSL_ENABLED: "false"
       POSTGRES_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-consulos}
       POSTGRES_USER: ${POSTGRES_USER:-consulos}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       REDIS_HOST: redis
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       MINIO_ENDPOINT: http://minio:9000
-      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
-      JWT_PRIVATE_KEY_PATH: /run/secrets/jwt-private.pem
-      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt-public.pem
+      MINIO_BUCKET: ${MINIO_BUCKET:-consulos-docs}
+      JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://consulos.local}
-    volumes:
-      - ./secrets/jwt-private.pem:/run/secrets/jwt-private.pem:ro
-      - ./secrets/jwt-public.pem:/run/secrets/jwt-public.pem:ro
+      CONSULOS_PROMETHEUS_ANONYMOUS: "true"
+    secrets:
+      - jwt_private
+      - jwt_public
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+      minio:
+        condition: service_started
     expose:
       - "8080"
+    networks:
+      - consulos
+    restart: unless-stopped
 
   frontend:
     build:
       context: ./consulos/consulos-frontend
     volumes:
       - frontend_dist:/var/www/consulos
+    networks:
+      - consulos
+    restart: unless-stopped
 
   nginx:
-    image: nginx:alpine
+    image: nginx:1.27-alpine
     ports:
       - "80:80"
       - "443:443"
@@ -76,8 +107,21 @@ services:
     depends_on:
       - backend
       - frontend
+    networks:
+      - consulos
+    restart: unless-stopped
+
+secrets:
+  jwt_private:
+    file: ./secrets/jwt-private.pem
+  jwt_public:
+    file: ./secrets/jwt-public.pem
 
 volumes:
   postgres_data:
   minio_data:
   frontend_dist:
+
+networks:
+  consulos:
+    name: consulos_prod

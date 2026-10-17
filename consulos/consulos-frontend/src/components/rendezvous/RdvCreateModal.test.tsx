@@ -68,6 +68,7 @@ describe('RdvCreateModal', () => {
     render(<RdvCreateModal open onOpenChange={vi.fn()} />)
     expect(screen.getByText(/Nouveau rendez-vous/i)).toBeInTheDocument()
     expect(screen.getByText(/Date & créneau/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/^Date$/i)).toHaveAttribute('id', 'rdv-date')
     expect(screen.getByRole('button', { name: /Suivant/i })).toBeDisabled()
   })
 
@@ -95,7 +96,7 @@ describe('RdvCreateModal', () => {
     await user.click(screen.getByRole('button', { name: /09:00/ }))
     await user.click(screen.getByRole('button', { name: /Suivant/i }))
 
-    expect(screen.getByText(/Usager/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Usager/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Suivant/i })).toBeDisabled()
     await user.type(screen.getByPlaceholderText(/Rechercher un usager/i), 'Ca')
     await user.click(await screen.findByRole('button', { name: /Mamadou Camara — GNB-2024-00001/i }))

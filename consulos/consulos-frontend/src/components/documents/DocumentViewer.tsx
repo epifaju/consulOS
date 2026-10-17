@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import { Download, Expand, Eye, Sparkles } from 'lucide-react'
+import { Download, Expand, Eye, Sparkles, Upload } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { documentService } from '@/services/documentService'
+import { useReplaceDocumentFile } from '@/hooks/useDocuments'
 import { useDocumentOcr, useOcrSuggestions } from '@/hooks/useOcr'
 import { resolveApiErrorMessage } from '@/lib/apiErrors'
 import { toast } from '@/hooks/use-toast'
@@ -26,7 +27,10 @@ async function resolveBlobAwareError(error: unknown, fallback: string): Promise<
   if (axios.isAxiosError(error) && error.response?.data instanceof Blob) {
     try {
       const text = await error.response.data.text()
-      const json = JSON.parse(text) as { message?: string }
+      const json = JSON.parse(text) as { message?: string; errorCode?: string }
+      if (json.errorCode === 'DOCUMENT_FILE_MISSING' && json.message) {
+        return json.message
+      }
       if (json.message) {
         return json.message
       }
@@ -46,6 +50,8 @@ export function DocumentViewer({
 }: DocumentViewerProps) {
   const { t } = useTranslation('documents')
   const navigate = useNavigate()
+  const replaceFile = useReplaceDocumentFile()
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [open, setOpen] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
   const [url, setUrl] = useState<string | null>(null)
@@ -80,28 +86,23 @@ export function DocumentViewer({
       setUrl(objectUrl)
       return objectUrl
     } catch (contentErr) {
-      // Fallback : URL présignée MinIO si l'endpoint /content n'est pas dispo / en erreur
-      try {
-        const response = await documentService.getDownloadUrl(documentId)
-        const presigned = response.data.data.url
-        setUrl(presigned)
-        return presigned
-      } catch {
-        const message = await resolveBlobAwareError(contentErr, t('viewer.error'))
-        setError(message)
-        toast({ variant: 'destructive', title: message })
-        return null
+      // Pas d'URL MinIO pré-signée : elle affiche du XML NoSuchKey dans l'iframe.
+      if (url?.startsWith('blob:')) {
+        URL.revokeObjectURL(url)
       }
+      setUrl(null)
+      const message = await resolveBlobAwareError(contentErr, t('viewer.fileMissing'))
+      setError(message)
+      toast({ variant: 'destructive', title: message })
+      return null
     } finally {
       setLoading(false)
     }
   }
 
   const handleView = async () => {
-    const objectUrl = await fetchBlobUrl()
-    if (objectUrl) {
-      setOpen(true)
-    }
+    await fetchBlobUrl()
+    setOpen(true)
   }
 
   const handleDownload = async () => {
@@ -118,17 +119,31 @@ export function DocumentViewer({
       anchor.click()
       anchor.remove()
       URL.revokeObjectURL(objectUrl)
-    } catch {
-      try {
-        const response = await documentService.getDownloadUrl(documentId)
-        window.open(response.data.data.url, '_blank', 'noopener,noreferrer')
-      } catch (err) {
-        const message = await resolveBlobAwareError(err, t('viewer.error'))
-        setError(message)
-        toast({ variant: 'destructive', title: message })
-      }
+    } catch (err) {
+      const message = await resolveBlobAwareError(err, t('viewer.fileMissing'))
+      setError(message)
+      toast({ variant: 'destructive', title: message })
+      setOpen(true)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleReplaceFile = async (file: File) => {
+    setLoading(true)
+    try {
+      await replaceFile.mutateAsync({ id: documentId, file })
+      toast({ title: t('viewer.reuploadSuccess') })
+      await fetchBlobUrl()
+    } catch (err) {
+      const message = await resolveBlobAwareError(err, t('viewer.error'))
+      setError(message)
+      toast({ variant: 'destructive', title: message })
+    } finally {
+      setLoading(false)
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
     }
   }
 
@@ -164,7 +179,35 @@ export function DocumentViewer({
               {t('viewer.fullscreen')}
             </Button>
           </DialogHeader>
-          {error && <p className="text-danger text-sm">{error}</p>}
+          {error && (
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-danger text-sm">{error}</p>
+              <div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="sr-only"
+                  aria-label={t('viewer.reupload')}
+                  onChange={(event) => {
+                    const file = event.target.files?.[0]
+                    if (file) {
+                      void handleReplaceFile(file)
+                    }
+                  }}
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  disabled={loading || replaceFile.isPending}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="mr-1 h-4 w-4" />
+                  {t('viewer.reupload')}
+                </Button>
+              </div>
+            </div>
+          )}
           {url && isPdf && (
             <iframe
               src={url}

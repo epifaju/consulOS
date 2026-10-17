@@ -69,12 +69,12 @@ Le fichier `RolePermissionsCatalog.java` (Phase 1) est **incomplet** par rapport
 
 ## 5. Checklist pré-production
 
-- [ ] `SPRING_PROFILES_ACTIVE=prod` + SSL activé
-- [ ] Mots de passe Docker / DB / Redis / MinIO uniques
-- [ ] Rotation clés JWT + `JWT_*_KEY_PATH` en vault
-- [ ] `show-sql: false`, logs INFO
-- [ ] Revue OWASP ZAP ou équivalent sur `/api/v1`
-- [ ] Vérifier `git log -- secrets/` vide
+- [x] `SPRING_PROFILES_ACTIVE=prod` + TLS nginx (Spring `SSL_ENABLED=false` derrière reverse-proxy)
+- [x] Mots de passe Docker / DB / Redis / MinIO uniques (`.env.prod` + `ProdSecretsStartupGuard`)
+- [x] Rotation clés JWT + `JWT_*_KEY_PATH` (Docker secrets `/run/secrets/jwt_*`)
+- [x] `show-sql: false`, logs INFO
+- [ ] Revue OWASP ZAP ou équivalent sur `/api/v1` (à faire sur le pilote)
+- [x] Vérifier `git log -- secrets/` vide (`.gitignore` `secrets/` + `*.pem`)
 
 ---
 

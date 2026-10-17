@@ -13,8 +13,9 @@ export default defineConfig({
     global: 'globalThis',
   },
   server: {
-    port: 3000,
-    strictPort: false,
+    // 3010 : 3000/3001 souvent pris par Grafana
+    port: 3010,
+    strictPort: true,
     proxy: {
       '/api': {
         target: 'http://localhost:8082',

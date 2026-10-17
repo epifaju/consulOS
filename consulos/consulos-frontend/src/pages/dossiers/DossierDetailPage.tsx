@@ -240,7 +240,7 @@ export function DossierDetailPage() {
               </div>
               <div className="sm:col-span-2">
                 <p className="mb-2 font-medium">{t('checklist.title')}</p>
-                <ChecklistViewer items={dossier.checklist} />
+                <ChecklistViewer items={dossier.checklist} dossierId={dossier.id} />
               </div>
             </CardContent>
           </Card>

@@ -64,6 +64,7 @@ describe('PaiementModal', () => {
 
     expect(screen.getByText(/Enregistrer un paiement/i)).toBeInTheDocument()
     expect(screen.getByText(/Reste dû/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Montant à encaisser/i)).toHaveAttribute('id', 'paiement-montant')
     expect(screen.getByDisplayValue('30')).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /Confirmer le paiement/i }))

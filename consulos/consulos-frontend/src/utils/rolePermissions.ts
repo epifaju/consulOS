@@ -1,79 +1,46 @@
-/**
- * Aligné sur @PreAuthorize des contrôleurs et MvpRoleAuthorizationReference (backend).
- * Voir SECURITY-MVP.md pour la matrice complète.
- */
-const USAGER_WRITE_ROLES = ['ROLE_AGENT', 'ROLE_ADMIN'] as const
-const USAGER_DELETE_ROLES = ['ROLE_ADMIN'] as const
-const USAGER_RGPD_EXPORT_ROLES = ['ROLE_AGENT', 'ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
+import { hasPermission, RBAC_NAV, type NavPath } from '@/utils/rbacMatrix'
+
+export type { NavPath }
 
 export function canWriteUsagers(role: string | undefined): boolean {
-  return role != null && (USAGER_WRITE_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'usagers:write')
 }
 
 export function canDeleteUsagers(role: string | undefined): boolean {
-  return role != null && (USAGER_DELETE_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'usagers:delete')
 }
 
 export function canExportUsagerRgpd(role: string | undefined): boolean {
-  return role != null && (USAGER_RGPD_EXPORT_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'usagers:rgpd-export')
 }
 
 export function canExportUsagerFichePdf(role: string | undefined): boolean {
   return canExportUsagerRgpd(role)
 }
 
-const DOSSIER_ASSIGN_ROLES = ['ROLE_AGENT', 'ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
-
 export function canAssignDossierAgent(role: string | undefined): boolean {
-  return role != null && (DOSSIER_ASSIGN_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'dossiers:assign')
 }
 
-const DASHBOARD_SUPERVISION_ROLES = ['ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
-const DASHBOARD_RECETTES_ROLES = ['ROLE_CAISSIER', 'ROLE_SUPERVISEUR', 'ROLE_ADMIN'] as const
-const RESEAU_ROLES = ['ROLE_ADMIN_RESEAU', 'ROLE_ADMIN', 'ROLE_SUPERVISEUR'] as const
-
 export function canViewDashboardSupervision(role: string | undefined): boolean {
-  return role != null && (DASHBOARD_SUPERVISION_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'dashboard:read')
 }
 
 export function canViewDashboardRecettes(role: string | undefined): boolean {
-  return role != null && (DASHBOARD_RECETTES_ROLES as readonly string[]).includes(role)
+  return hasPermission(role, 'dashboard:recettes')
 }
 
 export function canAccessReseau(role: string | undefined): boolean {
-  return role != null && (RESEAU_ROLES as readonly string[]).includes(role)
-}
-
-export type NavPath =
-  | '/'
-  | '/usagers'
-  | '/dossiers'
-  | '/rendezvous'
-  | '/documents'
-  | '/caisse'
-  | '/reporting'
-  | '/regional'
-  | '/administration'
-
-/** Rôles autorisés à voir chaque entrée du menu (aligné sur les APIs de lecture). */
-const NAV_ROLES: Record<NavPath, readonly string[]> = {
-  '/': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL', 'ROLE_ADMIN_RESEAU'],
-  '/usagers': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL'],
-  '/dossiers': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER', 'ROLE_ACCUEIL'],
-  '/rendezvous': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_ACCUEIL'],
-  '/documents': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_AGENT', 'ROLE_CAISSIER'],
-  '/caisse': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR', 'ROLE_CAISSIER'],
-  '/reporting': ['ROLE_ADMIN', 'ROLE_SUPERVISEUR'],
-  '/regional': ['ROLE_ADMIN_RESEAU', 'ROLE_ADMIN', 'ROLE_SUPERVISEUR'],
-  '/administration': ['ROLE_ADMIN'],
+  return hasPermission(role, 'reseau:read')
 }
 
 export function canAccessNav(path: NavPath, role: string | undefined): boolean {
-  if (role == null) return false
-  return NAV_ROLES[path].includes(role)
+  if (role == null) {
+    return false
+  }
+  return RBAC_NAV[path].includes(role)
 }
 
 export function canAccessAdministration(role: string | undefined): boolean {
   return canAccessNav('/administration', role)
 }
-

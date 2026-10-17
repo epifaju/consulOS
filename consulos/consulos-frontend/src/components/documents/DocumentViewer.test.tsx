@@ -1,13 +1,17 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { AxiosError, AxiosHeaders } from 'axios'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { DocumentViewer } from '@/components/documents/DocumentViewer'
+import { toast } from '@/hooks/use-toast'
 import type { DocumentOcrResult, OcrFieldSuggestion } from '@/services/ocrService'
 
-const { getContent, getDownloadUrl, ocrState, suggestionsState } = vi.hoisted(() => ({
+const { getContent, getDownloadUrl, replaceFile, ocrState, suggestionsState } = vi.hoisted(() => ({
   getContent: vi.fn(),
   getDownloadUrl: vi.fn(),
+  replaceFile: vi.fn(),
   ocrState: {
     data: null as DocumentOcrResult | null,
     isLoading: false,
@@ -21,6 +25,7 @@ vi.mock('@/services/documentService', () => ({
   documentService: {
     getContent: (...args: unknown[]) => getContent(...args),
     getDownloadUrl: (...args: unknown[]) => getDownloadUrl(...args),
+    replaceFile: (...args: unknown[]) => replaceFile(...args),
   },
 }))
 
@@ -59,7 +64,11 @@ const suggestions = {
 function renderViewer(
   props: Partial<{ mimeType: string | null; usagerId: string | null; nomOriginal: string }> = {},
 ) {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  })
   return render(
+    <QueryClientProvider client={queryClient}>
     <MemoryRouter>
       <Routes>
         <Route
@@ -76,7 +85,8 @@ function renderViewer(
         <Route path="/usagers/:id/edit" element={<div>Edit usager page</div>} />
         <Route path="/usagers/new" element={<div>New usager page</div>} />
       </Routes>
-    </MemoryRouter>,
+    </MemoryRouter>
+    </QueryClientProvider>,
   )
 }
 
@@ -92,6 +102,8 @@ describe('DocumentViewer', () => {
   beforeEach(() => {
     getContent.mockReset()
     getDownloadUrl.mockReset()
+    replaceFile.mockReset()
+    vi.mocked(toast).mockClear()
     ocrState.data = doneOcr
     ocrState.isLoading = false
     suggestionsState.data = suggestions
@@ -140,15 +152,85 @@ describe('DocumentViewer', () => {
     expect(await screen.findByText(/Aperçu non disponible/i)).toBeInTheDocument()
   })
 
-  it('falls back to presigned URL then toasts on total failure', async () => {
-    getContent.mockRejectedValue(new Error('content down'))
-    getDownloadUrl.mockRejectedValue(new Error('url down'))
+  it('shows missing-file message instead of MinIO XML fallback', async () => {
+    const blob = new Blob(
+      [
+        JSON.stringify({
+          success: false,
+          data: null,
+          message: 'Fichier absent du stockage. Ré-uploadez le document.',
+          errorCode: 'DOCUMENT_FILE_MISSING',
+        }),
+      ],
+      { type: 'application/json' },
+    )
+    getContent.mockRejectedValue(
+      new AxiosError('Request failed', 'ERR_BAD_REQUEST', { headers: new AxiosHeaders() }, undefined, {
+        status: 404,
+        statusText: 'Not Found',
+        headers: {},
+        config: { headers: new AxiosHeaders() },
+        data: blob,
+      }),
+    )
     const user = userEvent.setup()
     renderViewer()
     await user.click(clickIcon('lucide-eye'))
-    await waitFor(() => {
-      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(
+      await screen.findByText(/Fichier absent du stockage\. Ré-uploadez le document\./i),
+    ).toBeInTheDocument()
+    expect(document.querySelector('iframe')).toBeNull()
+    expect(getDownloadUrl).not.toHaveBeenCalled()
+    expect(toast).toHaveBeenCalledWith(
+      expect.objectContaining({
+        variant: 'destructive',
+        title: 'Fichier absent du stockage. Ré-uploadez le document.',
+      }),
+    )
+    expect(screen.getByRole('button', { name: /Ré-uploader le fichier/i })).toBeInTheDocument()
+  })
+
+  it('re-uploads a missing file then refreshes preview', async () => {
+    const missingBlob = new Blob(
+      [
+        JSON.stringify({
+          success: false,
+          data: null,
+          message: 'Fichier absent du stockage. Ré-uploadez le document.',
+          errorCode: 'DOCUMENT_FILE_MISSING',
+        }),
+      ],
+      { type: 'application/json' },
+    )
+    getContent.mockRejectedValueOnce(
+      new AxiosError('Request failed', 'ERR_BAD_REQUEST', { headers: new AxiosHeaders() }, undefined, {
+        status: 404,
+        statusText: 'Not Found',
+        headers: {},
+        config: { headers: new AxiosHeaders() },
+        data: missingBlob,
+      }),
+    )
+    replaceFile.mockResolvedValue({ data: { data: { id: 'doc-1' } } })
+    getContent.mockResolvedValueOnce({ data: new Blob(['%PDF'], { type: 'application/pdf' }) })
+    const user = userEvent.setup()
+    renderViewer()
+    await user.click(clickIcon('lucide-eye'))
+    const file = new File(['%PDF-1.4'], 'passeport.pdf', { type: 'application/pdf' })
+    fireEvent.change(screen.getByLabelText(/Ré-uploader le fichier/i), {
+      target: { files: [file] },
     })
+    await waitFor(() => {
+      expect(replaceFile).toHaveBeenCalledWith('doc-1', file)
+      expect(getContent).toHaveBeenCalledTimes(2)
+    })
+    expect(document.querySelector('iframe[title="passeport.pdf"]')).toHaveAttribute(
+      'src',
+      'blob:doc-url',
+    )
+    expect(toast).toHaveBeenCalledWith(
+      expect.objectContaining({ title: 'Fichier remplacé. L\'aperçu a été actualisé.' }),
+    )
   })
 
   it('downloads via attachment blob', async () => {

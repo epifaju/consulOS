@@ -1,0 +1,17 @@
+groups:
+  - name: consulos-pilot
+    rules:
+      - alert: ConsulosBackendDown
+        expr: up{job="consulos-backend"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: Backend ConsulOS injoignable (scrape Prometheus)
+      - alert: ConsulosHttp5xx
+        expr: sum(rate(http_server_requests_seconds_count{status=~"5.."}[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Taux d'erreurs HTTP 5xx élevé sur ConsulOS

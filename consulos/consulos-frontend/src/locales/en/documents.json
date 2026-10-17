@@ -63,6 +63,8 @@
     "fullscreen": "Fullscreen",
     "error": "Unable to load document",
     "fileMissing": "File missing from storage. Please re-upload the document.",
+    "reupload": "Re-upload file",
+    "reuploadSuccess": "File replaced. Preview has been refreshed.",
     "noPreview": "Preview not available for this file type",
     "ocr": "OCR text",
     "ocrEmpty": "No OCR result (module disabled or pending)",

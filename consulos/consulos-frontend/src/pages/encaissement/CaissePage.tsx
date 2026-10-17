@@ -249,6 +249,7 @@ export function CaissePage() {
                             size="sm"
                             onClick={() => openPaiement(enc)}
                             title={t('actions.payer')}
+                            aria-label={t('actions.payer')}
                           >
                             <CreditCard className="h-4 w-4" />
                           </Button>

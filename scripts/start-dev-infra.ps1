@@ -40,29 +40,61 @@ Push-Location $Root
 docker compose up -d postgres redis minio
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+$redisPort = docker compose port redis 6379 2>$null
+if (-not $redisPort) {
+    Write-Host "    Redis sans port hôte 6379 — recreation du conteneur..." -ForegroundColor Yellow
+    docker compose up -d --force-recreate redis
+    if ($LASTEXITCODE -ne 0) { Pop-Location; exit $LASTEXITCODE }
+}
+
 Write-Host "==> Attente PostgreSQL (port 5433)..." -ForegroundColor Cyan
-$ready = $false
+$pgReady = $false
 for ($i = 1; $i -le 30; $i++) {
     $tcp = Test-NetConnection -ComputerName 127.0.0.1 -Port 5433 -WarningAction SilentlyContinue
     if ($tcp.TcpTestSucceeded) {
-        $ready = $true
+        $pgReady = $true
+        break
+    }
+    Start-Sleep -Seconds 2
+}
+
+Write-Host "==> Attente Redis (port 6379)..." -ForegroundColor Cyan
+$redisReady = $false
+for ($i = 1; $i -le 30; $i++) {
+    $tcp = Test-NetConnection -ComputerName 127.0.0.1 -Port 6379 -WarningAction SilentlyContinue
+    if ($tcp.TcpTestSucceeded) {
+        $redisReady = $true
         break
     }
     Start-Sleep -Seconds 2
 }
 Pop-Location
 
-if (-not $ready) {
+if (-not $pgReady) {
     Write-Host "ERREUR : PostgreSQL inaccessible sur 127.0.0.1:5433" -ForegroundColor Red
     docker compose -f "$Root\docker-compose.yml" ps postgres
     exit 1
 }
 
+if (-not $redisReady) {
+    Write-Host "ERREUR : Redis inaccessible sur 127.0.0.1:6379 (le login ConsulOS en a besoin)." -ForegroundColor Red
+    docker compose -f "$Root\docker-compose.yml" ps redis
+    exit 1
+}
+
+Write-Host ""
+Write-Host "==> Sauvegarde MinIO (backups/minio/)..." -ForegroundColor Cyan
+& "$Root\scripts\backup-minio.ps1"
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "    Sauvegarde MinIO non bloquante (échec ignoré)." -ForegroundColor Yellow
+}
+
 Write-Host ""
 Write-Host "Infrastructure prête." -ForegroundColor Green
 Write-Host "  PostgreSQL : 127.0.0.1:5433 / consulos / consulos_dev_pass / consulos_dev"
-Write-Host "  Redis      : localhost:6379"
+Write-Host "  Redis      : localhost:6379  (obligatoire pour le login)"
 Write-Host "  MinIO      : http://localhost:9000"
+Write-Host "  Frontend   : http://localhost:3010  (Grafana = 3000/3001)"
 Write-Host ""
 Write-Host "Lancez la démo complète :" -ForegroundColor Cyan
 Write-Host "  .\scripts\start-demo.ps1"

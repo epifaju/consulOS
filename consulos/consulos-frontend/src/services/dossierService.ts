@@ -1,6 +1,7 @@
 import { apiClient } from '@/lib/apiClient'
 import type { ApiResponse } from '@/types/api'
 import type {
+  ChecklistItem,
   Commentaire,
   DossierCreateRequest,
   DossierDetail,
@@ -47,4 +48,12 @@ export const dossierService = {
 
   assignAgent: (id: string, agentId: string) =>
     apiClient.post<ApiResponse<DossierDetail>>(`/dossiers/${id}/assign-agent`, { agentId }),
+
+  getChecklist: (id: string) =>
+    apiClient.get<ApiResponse<ChecklistItem[]>>(`/dossiers/${id}/checklist`),
+
+  updateChecklistItem: (id: string, code: string, valide: boolean) =>
+    apiClient.put<ApiResponse<ChecklistItem[]>>(`/dossiers/${id}/checklist/${encodeURIComponent(code)}`, {
+      valide,
+    }),
 }

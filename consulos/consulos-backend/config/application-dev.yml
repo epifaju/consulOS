@@ -1,0 +1,9 @@
+# Surcharge locale (répertoire ./config) — frontend démo sur 3010 (Grafana occupe 3000/3001)
+# Bucket aligné sur MinioStorageService (consulos-docs), pas le défaut YAML "consulos"
+consulos:
+  minio:
+    bucket: consulos-docs
+  payment:
+    simulate-url: ${CONSULOS_PAYMENT_SIMULATE_URL:http://localhost:3010/caisse/paiement-en-ligne}
+    success-url: ${CONSULOS_PAYMENT_SUCCESS_URL:http://localhost:3010/caisse?payment=success}
+    cancel-url: ${CONSULOS_PAYMENT_CANCEL_URL:http://localhost:3010/caisse?payment=cancel}

@@ -48,8 +48,36 @@ export const documentService = {
     })
   },
 
+  replaceFile: (id: string, file: File) => {
+    const formData = new FormData()
+    formData.append('file', withInferredMime(file))
+    return apiClient.post<ApiResponse<DocumentItem>>(`/documents/${id}/replace`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  },
+
   updateStatut: (id: string, dto: StatutControleUpdate) =>
     apiClient.put<ApiResponse<DocumentItem>>(`/documents/${id}/statut-controle`, dto),
 
   delete: (id: string) => apiClient.delete(`/documents/${id}`),
+}
+
+function withInferredMime(file: File): File {
+  if (file.type) {
+    return file
+  }
+  const name = file.name.toLowerCase()
+  if (name.endsWith('.pdf')) {
+    return new File([file], file.name, { type: 'application/pdf' })
+  }
+  if (name.endsWith('.png')) {
+    return new File([file], file.name, { type: 'image/png' })
+  }
+  if (name.endsWith('.jpg') || name.endsWith('.jpeg')) {
+    return new File([file], file.name, { type: 'image/jpeg' })
+  }
+  if (name.endsWith('.webp')) {
+    return new File([file], file.name, { type: 'image/webp' })
+  }
+  return file
 }

@@ -16,6 +16,13 @@ apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
+  if (typeof FormData !== 'undefined' && config.data instanceof FormData) {
+    if (typeof config.headers.setContentType === 'function') {
+      config.headers.setContentType(false)
+    } else {
+      config.headers.delete('Content-Type')
+    }
+  }
   return config
 })
 
