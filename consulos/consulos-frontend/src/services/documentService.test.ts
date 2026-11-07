@@ -45,3 +45,36 @@ describe('documentService.replaceFile', () => {
     expect((body.get('file') as File).type).toBe('image/png')
   })
 })
+
+describe('documentService.upload', () => {
+  beforeEach(() => {
+    post.mockReset()
+    post.mockResolvedValue({ data: { success: true, data: { id: 'doc-1' } } })
+  })
+
+  it('posts multipart with typeDocument and optional dossier/usager', async () => {
+    const file = new File(['x'], 'scan.pdf', { type: 'application/pdf' })
+
+    await documentService.upload({
+      file,
+      dossierId: 'd-1',
+      usagerId: 'u-1',
+      typeDocument: 'PASSEPORT',
+      notes: 'verso',
+    })
+
+    const [url, body, config] = post.mock.calls[0] as [
+      string,
+      FormData,
+      { headers: { 'Content-Type': string } },
+    ]
+    expect(url).toBe('/documents/upload')
+    expect(body.get('typeDocument')).toBe('PASSEPORT')
+    expect(body.get('dossierId')).toBe('d-1')
+    expect(body.get('usagerId')).toBe('u-1')
+    expect(body.get('notes')).toBe('verso')
+    expect(body.get('file')).toBeInstanceOf(File)
+    expect(config.headers['Content-Type']).toBe('multipart/form-data')
+  })
+})
+

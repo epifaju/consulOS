@@ -2,6 +2,7 @@ package com.consulos.encaissement.export;
 
 import com.consulos.common.BusinessException;
 import com.consulos.common.PageResponse;
+import com.consulos.encaissement.EncaissementDayBounds;
 import com.consulos.encaissement.EncaissementService;
 import com.consulos.encaissement.dto.EncaissementSummaryDTO;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
@@ -38,8 +38,8 @@ public class EncaissementExcelExportService {
             );
         }
 
-        OffsetDateTime debut = dateDebut.atStartOfDay().atOffset(ZoneOffset.UTC);
-        OffsetDateTime fin = dateFin.plusDays(1).atStartOfDay().atOffset(ZoneOffset.UTC);
+        OffsetDateTime debut = EncaissementDayBounds.startOfDay(dateDebut);
+        OffsetDateTime fin = EncaissementDayBounds.startOfNextDay(dateFin);
 
         PageResponse<EncaissementSummaryDTO> page = encaissementService.list(
                 organisationId,

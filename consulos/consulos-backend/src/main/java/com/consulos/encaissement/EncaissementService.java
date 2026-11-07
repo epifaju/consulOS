@@ -31,7 +31,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.Year;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +80,11 @@ public class EncaissementService {
         if (dto.modePaiement() == ModePaiement.EXONERE) {
             entity.setStatut(StatutEncaissement.EXONERE);
             entity.setModePaiement(ModePaiement.EXONERE);
+        } else if (dto.modePaiement() != null) {
+            entity.setModePaiement(dto.modePaiement());
+            entity.setMontantPercu(dto.montantTotal());
+            entity.setStatut(StatutEncaissement.PAYE);
+            entity.setDatePaiement(OffsetDateTime.now());
         }
 
         EncaissementEntity saved = encaissementRepository.save(entity);
@@ -174,8 +178,8 @@ public class EncaissementService {
 
     @Transactional(readOnly = true)
     public JournalCaisseDTO getJournalCaisse(LocalDate date, UUID organisationId) {
-        OffsetDateTime debut = date.atStartOfDay().atOffset(ZoneOffset.UTC);
-        OffsetDateTime fin = date.plusDays(1).atStartOfDay().atOffset(ZoneOffset.UTC);
+        OffsetDateTime debut = EncaissementDayBounds.startOfDay(date);
+        OffsetDateTime fin = EncaissementDayBounds.startOfNextDay(date);
 
         List<ModeTotalDTO> parMode = new ArrayList<>();
         long totalTransactions = 0;

@@ -27,7 +27,6 @@ import org.springframework.data.jpa.domain.Specification;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -262,8 +261,8 @@ class EncaissementServiceRemainingGapsTest {
     @Test
     void getJournalCaisse_whenEmpty_shouldReturnZeros() {
         LocalDate date = LocalDate.of(2026, 6, 10);
-        OffsetDateTime debut = date.atStartOfDay().atOffset(ZoneOffset.UTC);
-        OffsetDateTime fin = date.plusDays(1).atStartOfDay().atOffset(ZoneOffset.UTC);
+        OffsetDateTime debut = EncaissementDayBounds.startOfDay(date);
+        OffsetDateTime fin = EncaissementDayBounds.startOfNextDay(date);
 
         when(encaissementRepository.sumByModeForDay(eq(organisationId), eq(debut), eq(fin)))
                 .thenReturn(List.<Object[]>of());

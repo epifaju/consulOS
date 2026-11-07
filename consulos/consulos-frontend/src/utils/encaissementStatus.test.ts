@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   formatMontant,
   getStatutBadgeClass,
+  localDayIsoRange,
   MODES_PAIEMENT,
   resteDu,
   STATUTS_ENCAISSEMENT,
@@ -32,5 +33,17 @@ describe('encaissementStatus', () => {
     expect(resteDu(100, 40)).toBe(60)
     expect(resteDu(100, null)).toBe(100)
     expect(resteDu(50, 80)).toBe(0)
+  })
+
+  it('maps a local calendar day to ISO instants covering local midnight', () => {
+    const { dateDebut, dateFin } = localDayIsoRange('2026-11-07')
+    const start = new Date(dateDebut)
+    const end = new Date(dateFin)
+    expect(start.getFullYear()).toBe(2026)
+    expect(start.getMonth()).toBe(10)
+    expect(start.getDate()).toBe(7)
+    expect(start.getHours()).toBe(0)
+    expect(end.getDate()).toBe(7)
+    expect(end.getHours()).toBe(23)
   })
 })

@@ -2,6 +2,7 @@ package com.consulos.encaissement;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -41,12 +42,14 @@ public final class EncaissementSpecifications {
         }
         return (root, query, cb) -> {
             if (debut != null && fin != null) {
-                return cb.between(root.get("createdAt"), debut, fin);
+                LocalDateTime from = EncaissementDayBounds.toLocal(debut);
+                LocalDateTime to = EncaissementDayBounds.toLocal(fin);
+                return cb.between(root.get("createdAt"), from, to);
             }
             if (debut != null) {
-                return cb.greaterThanOrEqualTo(root.get("createdAt"), debut);
+                return cb.greaterThanOrEqualTo(root.get("createdAt"), EncaissementDayBounds.toLocal(debut));
             }
-            return cb.lessThanOrEqualTo(root.get("createdAt"), fin);
+            return cb.lessThanOrEqualTo(root.get("createdAt"), EncaissementDayBounds.toLocal(fin));
         };
     }
 }

@@ -109,10 +109,11 @@ class EncaissementSpecificationsTest {
         assertThat(spec).isNotNull();
 
         when(root.get("createdAt")).thenReturn(path);
-        when(cb.between(path, debut, fin)).thenReturn(predicate);
+        when(cb.between(path, EncaissementDayBounds.toLocal(debut), EncaissementDayBounds.toLocal(fin)))
+                .thenReturn(predicate);
 
         assertThat(spec.toPredicate(root, query, cb)).isSameAs(predicate);
-        verify(cb).between(path, debut, fin);
+        verify(cb).between(path, EncaissementDayBounds.toLocal(debut), EncaissementDayBounds.toLocal(fin));
     }
 
     @Test
@@ -122,10 +123,10 @@ class EncaissementSpecificationsTest {
         assertThat(spec).isNotNull();
 
         when(root.get("createdAt")).thenReturn(path);
-        when(cb.greaterThanOrEqualTo(path, debut)).thenReturn(predicate);
+        when(cb.greaterThanOrEqualTo(path, EncaissementDayBounds.toLocal(debut))).thenReturn(predicate);
 
         assertThat(spec.toPredicate(root, query, cb)).isSameAs(predicate);
-        verify(cb).greaterThanOrEqualTo(path, debut);
+        verify(cb).greaterThanOrEqualTo(path, EncaissementDayBounds.toLocal(debut));
     }
 
     @Test
@@ -135,9 +136,9 @@ class EncaissementSpecificationsTest {
         assertThat(spec).isNotNull();
 
         when(root.get("createdAt")).thenReturn(path);
-        when(cb.lessThanOrEqualTo(path, fin)).thenReturn(predicate);
+        when(cb.lessThanOrEqualTo(path, EncaissementDayBounds.toLocal(fin))).thenReturn(predicate);
 
         assertThat(spec.toPredicate(root, query, cb)).isSameAs(predicate);
-        verify(cb).lessThanOrEqualTo(path, fin);
+        verify(cb).lessThanOrEqualTo(path, EncaissementDayBounds.toLocal(fin));
     }
 }

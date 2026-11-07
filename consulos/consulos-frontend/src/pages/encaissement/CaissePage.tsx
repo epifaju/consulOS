@@ -29,6 +29,7 @@ import { useSearchUsagers } from '@/hooks/useUsagers'
 import {
   formatMontant,
   getStatutBadgeClass,
+  localDayIsoRange,
   MODES_PAIEMENT,
   STATUTS_ENCAISSEMENT,
 } from '@/utils/encaissementStatus'
@@ -58,14 +59,15 @@ export function CaissePage() {
   const [paiementOpen, setPaiementOpen] = useState(false)
   const [selectedEncaissement, setSelectedEncaissement] = useState<EncaissementSummary | null>(null)
 
+  const dayRange = localDayIsoRange(selectedDate)
   const listQuery = useEncaissements({
     page,
     size: 20,
     sort: 'createdAt,desc',
     statut: statutFilter !== 'ALL' ? statutFilter : undefined,
     modePaiement: modeFilter !== 'ALL' ? modeFilter : undefined,
-    dateDebut: `${selectedDate}T00:00:00Z`,
-    dateFin: `${selectedDate}T23:59:59Z`,
+    dateDebut: dayRange.dateDebut,
+    dateFin: dayRange.dateFin,
   })
 
   const searchQuery = useSearchUsagers(usagerSearch)

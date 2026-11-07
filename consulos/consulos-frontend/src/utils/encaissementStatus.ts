@@ -44,3 +44,13 @@ export function formatMontant(montant: number | null | undefined, devise = 'EUR'
 export function resteDu(montantTotal: number, montantPercu: number | null | undefined): number {
   return Math.max(0, montantTotal - (montantPercu ?? 0))
 }
+
+/** Bornes ISO d'un jour civil local (évite le filtre UTC qui masque 0h–1h en CET). */
+export function localDayIsoRange(isoDate: string): { dateDebut: string; dateFin: string } {
+  const start = new Date(`${isoDate}T00:00:00`)
+  const end = new Date(`${isoDate}T23:59:59.999`)
+  return {
+    dateDebut: start.toISOString(),
+    dateFin: end.toISOString(),
+  }
+}
